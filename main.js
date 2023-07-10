@@ -5488,7 +5488,7 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('svg'),
-								$elm$html$Html$Attributes$src('/SVGs/breakfast-svgrepo-com.svg'),
+								$elm$html$Html$Attributes$src('/SVGs/breakfast.svg'),
 								$elm$html$Html$Events$onClick(
 								$author$project$Update$SvgClicked(1))
 							]),
@@ -5498,7 +5498,7 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('svg'),
-								$elm$html$Html$Attributes$src('/SVGs/lunch-svgrepo-com.svg'),
+								$elm$html$Html$Attributes$src('/SVGs/lunch.svg'),
 								$elm$html$Html$Events$onClick(
 								$author$project$Update$SvgClicked(2))
 							]),
@@ -5508,7 +5508,7 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('svg'),
-								$elm$html$Html$Attributes$src('/SVGs/dessert-svgrepo-com.svg'),
+								$elm$html$Html$Attributes$src('/SVGs/dessert.svg'),
 								$elm$html$Html$Events$onClick(
 								$author$project$Update$SvgClicked(3))
 							]),
