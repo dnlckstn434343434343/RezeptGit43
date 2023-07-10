@@ -5667,7 +5667,7 @@ var $author$project$Main$main = $elm$browser$Browser$application(
 					[
 						$author$project$Main$view(model)
 					]),
-				title: 'Title'
+				title: 'Deine RezeptApp'
 			};
 		}
 	});

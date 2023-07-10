@@ -47,7 +47,7 @@ main =
     Browser.application
         { init = Url_Nav.init
         , view = \model -> 
-            { title = "Title"
+            { title = "Deine RezeptApp"
             , body = [ view model ]
             }
         , update = update
