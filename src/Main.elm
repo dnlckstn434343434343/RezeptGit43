@@ -31,7 +31,7 @@ view model =
                 , option [ value "mittel" ] [ text "mittel" ]
                 , option [ value "schwer" ] [ text "schwer" ]
                 ]
-            , div [] [] -- This is the added div element that creates a blank line
+            , div [] [] 
             , select [ onInput UpdateCategoryInput ]
                 [ option [ value "" ] [ text "Kategorie wählen" ]
                 , option [ value "Frühstück" ] [ text "Frühstück" ]
