@@ -5346,6 +5346,7 @@ var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -5460,7 +5461,7 @@ var $author$project$Recipe$viewRecipe = function (recipe) {
 					]))
 			]));
 };
-var $author$project$Main$view = function (model) {
+var $author$project$View$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
 		_List_Nil,
@@ -5485,35 +5486,83 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$img,
+						$elm$html$Html$div,
+						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('svg'),
-								$elm$html$Html$Attributes$src('./SVGs/breakfast.svg'),
-								$elm$html$Html$Events$onClick(
-								$author$project$Update$SvgClicked(1))
-							]),
-						_List_Nil),
+								A2(
+								$elm$html$Html$img,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('svg'),
+										$elm$html$Html$Attributes$src('./SVGs/breakfast.svg'),
+										$elm$html$Html$Events$onClick(
+										$author$project$Update$SvgClicked(1))
+									]),
+								_List_Nil),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('svg.Unterschrift')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Frühstück')
+									]))
+							])),
 						A2(
-						$elm$html$Html$img,
+						$elm$html$Html$div,
+						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('svg'),
-								$elm$html$Html$Attributes$src('./SVGs/lunch.svg'),
-								$elm$html$Html$Events$onClick(
-								$author$project$Update$SvgClicked(2))
-							]),
-						_List_Nil),
+								A2(
+								$elm$html$Html$img,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('svg'),
+										$elm$html$Html$Attributes$src('./SVGs/lunch.svg'),
+										$elm$html$Html$Events$onClick(
+										$author$project$Update$SvgClicked(2))
+									]),
+								_List_Nil),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('svg.Unterschrift')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Mittag-/Abendessen')
+									]))
+							])),
 						A2(
-						$elm$html$Html$img,
+						$elm$html$Html$div,
+						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('svg'),
-								$elm$html$Html$Attributes$src('./SVGs/dessert.svg'),
-								$elm$html$Html$Events$onClick(
-								$author$project$Update$SvgClicked(3))
-							]),
-						_List_Nil)
+								A2(
+								$elm$html$Html$img,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('svg'),
+										$elm$html$Html$Attributes$src('./SVGs/dessert.svg'),
+										$elm$html$Html$Events$onClick(
+										$author$project$Update$SvgClicked(3))
+									]),
+								_List_Nil),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('svg.Unterschrift')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Dessert/Süßes')
+									]))
+							]))
 					])),
 				A2($elm$html$Html$div, _List_Nil, _List_Nil),
 				A2(
@@ -5656,7 +5705,7 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$option,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$value('Mittagessen')
+										$elm$html$Html$Attributes$value('Dessert/Süßes')
 									]),
 								_List_fromArray(
 									[
@@ -5684,7 +5733,15 @@ var $author$project$Main$view = function (model) {
 						A2(
 						$elm$html$Html$ul,
 						_List_Nil,
-						A2($elm$core$List$map, $author$project$Recipe$viewRecipe, model.recipes))
+						_Utils_ap(
+							A2($elm$core$List$map, $author$project$Recipe$viewRecipe, model.recipes),
+							((model.nameInput !== '') || ((model.ingredientsInput !== '') || ((model.stepsInput !== '') || ((model.timeInput !== '') || ((model.difficultyInput !== '') || (model.categoryInput !== '')))))) ? A2(
+								$elm$core$List$map,
+								$author$project$Recipe$viewRecipe,
+								_List_fromArray(
+									[
+										{category: model.categoryInput, difficulty: model.difficultyInput, ingredients: model.ingredientsInput, name: model.nameInput, steps: model.stepsInput, time: model.timeInput}
+									])) : _List_Nil))
 					]))
 			]));
 };
@@ -5699,7 +5756,7 @@ var $author$project$Main$main = $elm$browser$Browser$application(
 			return {
 				body: _List_fromArray(
 					[
-						$author$project$Main$view(model)
+						$author$project$View$view(model)
 					]),
 				title: 'Deine RezeptApp'
 			};
