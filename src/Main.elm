@@ -1,11 +1,11 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, h1, h2, input, option, select, text, textarea, ul, img)
+import Html exposing (Html, button, div, h2, input, option, select, text, textarea, ul, img)
 import Html.Attributes exposing (placeholder, value, alt, src, class)
 import Html.Events exposing (onClick, onInput)
 import Recipe exposing (viewRecipe)
-import Update exposing (Model, Msg(..), initialModel, update)
+import Update exposing (Model, Msg(..), update)
 import Url_Nav
 
 
@@ -15,7 +15,11 @@ type alias Flags = ()
 view : Model -> Html Msg
 view model =
     div []
-        [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
+        [ div [ class "header" ]
+            [ button [  ] [ text "Start" ] --onClick Start
+            , button [  ] [ text "Meine Lieblingsrezepte" ] --onClick OpenFavRecipes
+            ]
+        , img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
         , div [ class "container" ]
             [ input [ class "input", placeholder "Name des Rezepts", onInput UpdateNameInput, value model.nameInput ] []
             , textarea [ class "textarea", placeholder "Zutaten", onInput UpdateIngredientsInput, value model.ingredientsInput ] []
@@ -40,6 +44,8 @@ view model =
             , ul [] <| List.map viewRecipe model.recipes
             ]
         ]
+
+
 
 
 main : Program Flags Model Msg
