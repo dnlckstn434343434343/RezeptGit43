@@ -5475,6 +5475,7 @@ var $author$project$Main$view = function (model) {
 						$elm$html$Html$Attributes$alt('Logo')
 					]),
 				_List_Nil),
+				A2($elm$html$Html$div, _List_Nil, _List_Nil),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
@@ -5514,6 +5515,7 @@ var $author$project$Main$view = function (model) {
 							]),
 						_List_Nil)
 					])),
+				A2($elm$html$Html$div, _List_Nil, _List_Nil),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
@@ -5658,17 +5660,7 @@ var $author$project$Main$view = function (model) {
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Dessert')
-									])),
-								A2(
-								$elm$html$Html$option,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$value('Abendessen')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Snack')
+										$elm$html$Html$text('Dessert/Süßes')
 									]))
 							])),
 						A2(

@@ -53,11 +53,30 @@ view model =
                 [ option [ value "" ] [ text "Kategorie wählen" ]
                 , option [ value "Frühstück" ] [ text "Frühstück" ]
                 , option [ value "Mittagessen" ] [ text "Mittag-/Abendessen" ]
-                , option [ value "Mittagessen" ] [ text "Dessert/Süßes" ]
+                , option [ value "Dessert/Süßes" ] [ text "Dessert/Süßes" ]
                 ]
             , button [ class "button", onClick AddRecipe ] [ text "Rezept speichern" ]
             , h2 [] [ text "Hier sind deine gespeicherten Lieblingsrezepte:" ]
-            , ul [] <| List.map viewRecipe model.recipes
+            , ul []
+                (List.map viewRecipe model.recipes -- inputs des Users in "Lieblingsezepte" übernehmen 
+                    ++ (if model.nameInput /= "" || model.ingredientsInput /= "" 
+                    || model.stepsInput /= "" 
+                    || model.timeInput /= "" 
+                    || model.difficultyInput /= "" 
+                    || model.categoryInput /= "" then
+                            [{ name = model.nameInput
+                             , ingredients = model.ingredientsInput
+                             , steps = model.stepsInput
+                             , time = model.timeInput
+                             , difficulty = model.difficultyInput
+                             , category = model.categoryInput
+                             }]
+                                |> List.map viewRecipe
+
+                        else
+                            []
+                       )
+                )
             ]
         ]
 
