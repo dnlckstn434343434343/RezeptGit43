@@ -15,6 +15,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
+        , div [] [] 
         , div [ class "svg-container" ]
             [ img
                 [ class "svg"
@@ -35,6 +36,7 @@ view model =
                 ]
                 []
             ]
+        , div [] [] 
         , div [ class "container" ]
             [ input [ class "input", placeholder "Name des Rezepts", onInput UpdateNameInput, value model.nameInput ] []
             , textarea [ class "textarea", placeholder "Zutaten", onInput UpdateIngredientsInput, value model.ingredientsInput ] []
@@ -51,8 +53,7 @@ view model =
                 [ option [ value "" ] [ text "Kategorie wählen" ]
                 , option [ value "Frühstück" ] [ text "Frühstück" ]
                 , option [ value "Mittagessen" ] [ text "Mittag-/Abendessen" ]
-                , option [ value "Mittagessen" ] [ text "Dessert" ]
-                , option [ value "Abendessen" ] [ text "Snack" ]
+                , option [ value "Mittagessen" ] [ text "Dessert/Süßes" ]
                 ]
             , button [ class "button", onClick AddRecipe ] [ text "Rezept speichern" ]
             , h2 [] [ text "Hier sind deine gespeicherten Lieblingsrezepte:" ]
