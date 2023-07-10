@@ -48,3 +48,6 @@ img {
     width: 200px;
 }
 
+.svg:hover {
+    transform: scale(1.1);
+}
