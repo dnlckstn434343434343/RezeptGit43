@@ -33,12 +33,14 @@ type Msg
     = AddRecipe
     | ChangeUrl String
     | NoOp
+    | SvgClicked Int
     | UpdateNameInput String
     | UpdateIngredientsInput String
     | UpdateStepsInput String
     | UpdateTimeInput String
     | UpdateDifficultyInput String
     | UpdateCategoryInput String
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -64,6 +66,11 @@ update msg model =
         NoOp ->
             ( model, Cmd.none )
 
+        SvgClicked index ->
+                    -- hier kommt das Event rein, wenn man auf die SVG klickt, es soll ein random Frühsück,Mittagessen oder Dessert ausgegeben werden
+
+            ( model, Cmd.none )
+
         UpdateNameInput newName ->
             ( { model | nameInput = newName }, Cmd.none )
 
@@ -81,4 +88,3 @@ update msg model =
 
         UpdateCategoryInput newCategory ->
             ( { model | categoryInput = newCategory }, Cmd.none )
-

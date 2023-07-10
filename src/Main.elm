@@ -8,18 +8,33 @@ import Recipe exposing (viewRecipe)
 import Update exposing (Model, Msg(..), update)
 import Url_Nav
 
-
 type alias Flags = ()
 
 
 view : Model -> Html Msg
 view model =
     div []
-        [ div [ class "header" ]
-            [ button [  ] [ text "Start" ] --onClick Start
-            , button [  ] [ text "Meine Lieblingsrezepte" ] --onClick OpenFavRecipes
+        [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
+        , div [ class "svg-container" ]
+            [ img
+                [ class "svg"
+                , src "/SVGs/breakfast-svgrepo-com.svg"
+                , onClick (SvgClicked 1)
+                ]
+                []
+            , img
+                [ class "svg"
+                , src "/SVGs/lunch-svgrepo-com.svg"
+                , onClick (SvgClicked 2)
+                ]
+                []
+            , img
+                [ class "svg"
+                , src "/SVGs/dessert-svgrepo-com.svg"
+                , onClick (SvgClicked 3)
+                ]
+                []
             ]
-        , img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
         , div [ class "container" ]
             [ input [ class "input", placeholder "Name des Rezepts", onInput UpdateNameInput, value model.nameInput ] []
             , textarea [ class "textarea", placeholder "Zutaten", onInput UpdateIngredientsInput, value model.ingredientsInput ] []
@@ -40,12 +55,10 @@ view model =
                 , option [ value "Abendessen" ] [ text "Snack" ]
                 ]
             , button [ class "button", onClick AddRecipe ] [ text "Rezept speichern" ]
-            , h2 [ class "h2"] [ text "Hier sind deine gespeicherten Lieblingsrezepte:" ]
+            , h2 [] [ text "Hier sind deine gespeicherten Lieblingsrezepte:" ]
             , ul [] <| List.map viewRecipe model.recipes
             ]
         ]
-
-
 
 
 main : Program Flags Model Msg
@@ -61,4 +74,3 @@ main =
         , onUrlChange = Url_Nav.onUrlChange
         , onUrlRequest = Url_Nav.onUrlRequest
         }
-
