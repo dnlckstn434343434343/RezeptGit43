@@ -60,7 +60,8 @@ view model =
                 , option [ value "Mittagessen" ] [ text "Mittag-/Abendessen" ]
                 , option [ value "Dessert/Süßes" ] [ text "Dessert/Süßes" ]
                 ]
-            , button [ class "button", onClick AddRecipe ] [ text "Rezept speichern" ]
+                -- statt des Buttons soll es im Header neben "Lieblingsrezepte" einen klickbaren + Button geben, mit dem sich über der Hauptseite ein Fenster öffnet, wo  man das Rezept hinzufüge kann im Dropdown unter Lieblingsrezepte
+            , button [ class "button", onClick AddRecipe ] [ text "Rezept speichern" ] 
             , h2 [] [ text "Hier sind deine gespeicherten Lieblingsrezepte:" ]
             , ul []
                 (List.map viewRecipe model.recipes -- inputs des Users in "Lieblingsezepte" übernehmen 

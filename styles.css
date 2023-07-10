@@ -38,11 +38,11 @@ button {
 
 }
 
-.button {
+button {
     transition-duration: 0.4s;
 }
   
-.button:hover {
+button:hover {
     background-color: #4CAF50; /* Grün */
     color: white;
 }
@@ -72,6 +72,6 @@ img {
     transform: scale(1.1); /*leichtes Vergrößern der SVGs, wenn man mit dem Cursor drüber hovert*/
 }
 
-svg.Unterschrift {
+.svg.Unterschrift { /*wird das übernommen? nochmal Selektoren anschauen*/
     font-family: Arial, Helvetica, sans-serif;
 }
