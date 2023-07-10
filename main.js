@@ -5262,6 +5262,9 @@ var $author$project$Update$update = F2(
 					A2($elm$browser$Browser$Navigation$pushUrl, model.key, url));
 			case 'NoOp':
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+			case 'SvgClicked':
+				var index = msg.a;
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			case 'UpdateNameInput':
 				var newName = msg.a;
 				return _Utils_Tuple2(
@@ -5307,6 +5310,9 @@ var $author$project$Update$update = F2(
 		}
 	});
 var $author$project$Update$AddRecipe = {$: 'AddRecipe'};
+var $author$project$Update$SvgClicked = function (a) {
+	return {$: 'SvgClicked', a: a};
+};
 var $author$project$Update$UpdateCategoryInput = function (a) {
 	return {$: 'UpdateCategoryInput', a: a};
 };
@@ -5469,6 +5475,45 @@ var $author$project$Main$view = function (model) {
 						$elm$html$Html$Attributes$alt('Logo')
 					]),
 				_List_Nil),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('svg-container')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$img,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('svg'),
+								$elm$html$Html$Attributes$src('/SVGs/breakfast-svgrepo-com.svg'),
+								$elm$html$Html$Events$onClick(
+								$author$project$Update$SvgClicked(1))
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$img,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('svg'),
+								$elm$html$Html$Attributes$src('/SVGs/lunch-svgrepo-com.svg'),
+								$elm$html$Html$Events$onClick(
+								$author$project$Update$SvgClicked(2))
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$img,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('svg'),
+								$elm$html$Html$Attributes$src('/SVGs/dessert-svgrepo-com.svg'),
+								$elm$html$Html$Events$onClick(
+								$author$project$Update$SvgClicked(3))
+							]),
+						_List_Nil)
+					])),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
@@ -5639,10 +5684,7 @@ var $author$project$Main$view = function (model) {
 							])),
 						A2(
 						$elm$html$Html$h2,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('h2')
-							]),
+						_List_Nil,
 						_List_fromArray(
 							[
 								$elm$html$Html$text('Hier sind deine gespeicherten Lieblingsrezepte:')
