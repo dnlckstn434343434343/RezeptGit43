@@ -13,24 +13,33 @@ view model =
         [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
         , div [] [] 
         , div [ class "svg-container" ]
-            [ img
-                [ class "svg"
-                , src "./SVGs/breakfast.svg"
-                , onClick (SvgClicked 1)
+            [ div []
+                [ img
+                    [ class "svg"
+                    , src "./SVGs/breakfast.svg"
+                    , onClick (SvgClicked 1)
+                    ]
+                    []
+                , div [class "svg.Unterschrift"] [ text "Frühstück" ]
                 ]
-                []
-            , img
-                [ class "svg"
-                , src "./SVGs/lunch.svg"
-                , onClick (SvgClicked 2)
+            , div []
+                [ img
+                    [ class "svg"
+                    , src "./SVGs/lunch.svg"
+                    , onClick (SvgClicked 2)
+                    ]
+                    []
+                , div [class "svg.Unterschrift"] [ text "Mittag-/Abendessen" ]
                 ]
-                []
-            , img
-                [ class "svg"
-                , src "./SVGs/dessert.svg"
-                , onClick (SvgClicked 3)
+            , div []
+                [ img
+                    [ class "svg"
+                    , src "./SVGs/dessert.svg"
+                    , onClick (SvgClicked 3)
+                    ]
+                    []
+                , div [class "svg.Unterschrift"] [ text "Dessert/Süßes" ]
                 ]
-                []
             ]
         , div [] [] 
         , div [ class "container" ]
@@ -75,3 +84,5 @@ view model =
                 )
             ]
         ]
+
+
