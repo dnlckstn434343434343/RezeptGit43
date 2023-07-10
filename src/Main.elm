@@ -18,19 +18,19 @@ view model =
         , div [ class "svg-container" ]
             [ img
                 [ class "svg"
-                , src "/SVGs/breakfast-svgrepo-com.svg"
+                , src "/SVGs/breakfast.svg"
                 , onClick (SvgClicked 1)
                 ]
                 []
             , img
                 [ class "svg"
-                , src "/SVGs/lunch-svgrepo-com.svg"
+                , src "/SVGs/lunch.svg"
                 , onClick (SvgClicked 2)
                 ]
                 []
             , img
                 [ class "svg"
-                , src "/SVGs/dessert-svgrepo-com.svg"
+                , src "/SVGs/dessert.svg"
                 , onClick (SvgClicked 3)
                 ]
                 []
