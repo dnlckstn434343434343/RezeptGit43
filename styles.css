@@ -40,8 +40,11 @@ img {
     margin: 0 auto;
 }
 
-svg {
-    width: 500px;
-
-
+.svg-container {
+    display: flex;
 }
+
+.svg {
+    width: 200px;
+}
+
