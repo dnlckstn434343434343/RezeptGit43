@@ -6,6 +6,10 @@ import Html.Attributes exposing (alt, class, src, href)
 import Html.Events exposing (onClick)
 import Recipe exposing (viewRecipe)
 import Update exposing (Model, Msg(..))
+import Html exposing (input)
+import Html.Attributes exposing (placeholder)
+import Html.Events exposing (onInput)
+import Html exposing (textarea)
 
 view : Model -> Html Msg
 view model =
@@ -46,9 +50,15 @@ view model =
         , button [ onClick ToggleAddRecipeForm ] 
             [ text (if model.showAddRecipeForm then "-" else "+") ]
         , if model.showAddRecipeForm then
-            
-            text ""
-
+            div []
+            [ input [ placeholder "Name", onInput UpdateNameInput ] []
+            , input [ placeholder "Ingredients", onInput UpdateIngredientsInput ] []
+            , textarea [ placeholder "Steps", onInput UpdateStepsInput ] []
+            , input [ placeholder "Time", onInput UpdateTimeInput ] []
+            , input [ placeholder "Difficulty", onInput UpdateDifficultyInput ] []
+            , input [ placeholder "Category", onInput UpdateCategoryInput ] []
+            , button [ onClick AddRecipe ] [ text "Add Recipe" ]
+            ]
           else
             text ""
         , h2 [] [ text "Hier sind deine gespeicherten Lieblingsrezepte:" ]
