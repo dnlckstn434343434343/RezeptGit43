@@ -1,6 +1,6 @@
 body {
     background-color: white;
-    font-family: sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
@@ -8,11 +8,15 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 h1 {
     color: red;
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 input, textarea {
@@ -21,17 +25,33 @@ input, textarea {
     width: 300px;
     height: 50px;
     text-align: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 button {
     margin-top: 20px;
-    border: 1.0cm;
     text-align: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+button {
+    transition-duration: 0.4s;
+}
+  
+button:hover {
+    background-color: #ff0404;
+    color: white;
 }
 
 h2 {
     color: red;
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 img {
@@ -50,4 +70,8 @@ img {
 
 .svg:hover {
     transform: scale(1.1); /*leichtes Vergrößern der SVGs, wenn man mit dem Cursor drüber hovert*/
+}
+
+.svg.Unterschrift { /*wird das übernommen? nochmal Selektoren anschauen*/
+    font-family: Arial, Helvetica, sans-serif;
 }
