@@ -1,8 +1,9 @@
 module View exposing (view)
 
-import Html exposing (Html, button, div, h2, input, option, select, text, textarea, ul, img)
-import Html.Attributes exposing (placeholder, value, alt, src, class)
-import Html.Events exposing (onClick, onInput)
+import Recipe_Api
+import Html exposing (Html, button, div, h2, img, text, ul)
+import Html.Attributes exposing (alt, class, src)
+import Html.Events exposing (onClick)
 import Recipe exposing (viewRecipe)
 import Update exposing (Model, Msg(..))
 
@@ -41,49 +42,15 @@ view model =
                 , div [class "svg.Unterschrift"] [ text "Dessert/Süßes" ]
                 ]
             ]
-        , div [] [] 
-        , div [ class "container" ]
-            [ input [ class "input", placeholder "Name des Rezepts", onInput UpdateNameInput, value model.nameInput ] []
-            , textarea [ class "textarea", placeholder "Zutaten", onInput UpdateIngredientsInput, value model.ingredientsInput ] []
-            , textarea [ class "textarea", placeholder "Zubereitungsschritte", onInput UpdateStepsInput, value model.stepsInput ] []
-            , input [ class "input", placeholder "Zubereitungszeit in Minuten", onInput UpdateTimeInput, value model.timeInput ] []
-            , select [ onInput UpdateDifficultyInput ]
-                [ option [ value "" ] [ text "Schwierigkeitsgrad wählen" ]
-                , option [ value "leicht" ] [ text "leicht" ]
-                , option [ value "mittel" ] [ text "mittel" ]
-                , option [ value "schwer" ] [ text "schwer" ]
-                ]
-            , div [] [] 
-            , select [ onInput UpdateCategoryInput ]
-                [ option [ value "" ] [ text "Kategorie wählen" ]
-                , option [ value "Frühstück" ] [ text "Frühstück" ]
-                , option [ value "Mittagessen" ] [ text "Mittag-/Abendessen" ]
-                , option [ value "Dessert/Süßes" ] [ text "Dessert/Süßes" ]
-                ]
-                -- statt des Buttons soll es im Header neben "Lieblingsrezepte" einen klickbaren + Button geben, mit dem sich über der Hauptseite ein Fenster öffnet, wo  man das Rezept hinzufüge kann im Dropdown unter Lieblingsrezepte
-            , button [ class "button", onClick AddRecipe ] [ text "Rezept speichern" ] 
-            , h2 [] [ text "Hier sind deine gespeicherten Lieblingsrezepte:" ]
-            , ul []
-                (List.map viewRecipe model.recipes -- inputs des Users in "Lieblingsezepte" übernehmen 
-                    ++ (if model.nameInput /= "" || model.ingredientsInput /= "" 
-                    || model.stepsInput /= "" 
-                    || model.timeInput /= "" 
-                    || model.difficultyInput /= "" 
-                    || model.categoryInput /= "" then
-                            [{ name = model.nameInput
-                             , ingredients = model.ingredientsInput
-                             , steps = model.stepsInput
-                             , time = model.timeInput
-                             , difficulty = model.difficultyInput
-                             , category = model.categoryInput
-                             }]
-                                |> List.map viewRecipe
+        , button [ onClick ToggleAddRecipeForm ] 
+            [ text (if model.showAddRecipeForm then "-" else "+") ]
+        , if model.showAddRecipeForm then
+            Recipe_Api.view model
 
-                        else
-                            []
-                       )
-                )
-            ]
+          else
+            text ""
+        , h2 [] [ text "Hier sind deine gespeicherten Lieblingsrezepte:" ]
+        , ul []
+            (List.map viewRecipe model.recipes)
         ]
-
 

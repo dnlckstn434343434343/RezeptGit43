@@ -5160,7 +5160,7 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Update$initialModel = function (key) {
-	return {categoryInput: '', difficultyInput: '', ingredientsInput: '', key: key, nameInput: '', recipes: _List_Nil, stepsInput: '', timeInput: ''};
+	return {categoryInput: '', difficultyInput: '', ingredientsInput: '', key: key, nameInput: '', recipes: _List_Nil, showAddRecipeForm: false, stepsInput: '', timeInput: ''};
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -5236,6 +5236,7 @@ var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Url_Nav$subscriptions = function (model) {
 	return $elm$core$Platform$Sub$none;
 };
+var $elm$core$Basics$not = _Basics_not;
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $author$project$Update$update = F2(
 	function (msg, model) {
@@ -5265,6 +5266,12 @@ var $author$project$Update$update = F2(
 			case 'SvgClicked':
 				var index = msg.a;
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+			case 'ToggleAddRecipeForm':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showAddRecipeForm: !model.showAddRecipeForm}),
+					$elm$core$Platform$Cmd$none);
 			case 'UpdateNameInput':
 				var newName = msg.a;
 				return _Utils_Tuple2(
@@ -5300,37 +5307,34 @@ var $author$project$Update$update = F2(
 						model,
 						{difficultyInput: newDifficulty}),
 					$elm$core$Platform$Cmd$none);
-			default:
+			case 'UpdateCategoryInput':
 				var newCategory = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{categoryInput: newCategory}),
 					$elm$core$Platform$Cmd$none);
+			default:
+				var result = msg.a;
+				if (result.$ === 'Ok') {
+					var recipe = result.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								recipes: A2($elm$core$List$cons, recipe, model.recipes)
+							}),
+						$elm$core$Platform$Cmd$none);
+				} else {
+					var error = result.a;
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				}
 		}
 	});
-var $author$project$Update$AddRecipe = {$: 'AddRecipe'};
 var $author$project$Update$SvgClicked = function (a) {
 	return {$: 'SvgClicked', a: a};
 };
-var $author$project$Update$UpdateCategoryInput = function (a) {
-	return {$: 'UpdateCategoryInput', a: a};
-};
-var $author$project$Update$UpdateDifficultyInput = function (a) {
-	return {$: 'UpdateDifficultyInput', a: a};
-};
-var $author$project$Update$UpdateIngredientsInput = function (a) {
-	return {$: 'UpdateIngredientsInput', a: a};
-};
-var $author$project$Update$UpdateNameInput = function (a) {
-	return {$: 'UpdateNameInput', a: a};
-};
-var $author$project$Update$UpdateStepsInput = function (a) {
-	return {$: 'UpdateStepsInput', a: a};
-};
-var $author$project$Update$UpdateTimeInput = function (a) {
-	return {$: 'UpdateTimeInput', a: a};
-};
+var $author$project$Update$ToggleAddRecipeForm = {$: 'ToggleAddRecipeForm'};
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -5345,8 +5349,6 @@ var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$img = _VirtualDom_node('img');
-var $elm$html$Html$input = _VirtualDom_node('input');
-var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -5364,42 +5366,6 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
-var $elm$html$Html$Events$alwaysStop = function (x) {
-	return _Utils_Tuple2(x, true);
-};
-var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
-	return {$: 'MayStopPropagation', a: a};
-};
-var $elm$html$Html$Events$stopPropagationOn = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
-	});
-var $elm$json$Json$Decode$field = _Json_decodeField;
-var $elm$json$Json$Decode$at = F2(
-	function (fields, decoder) {
-		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
-	});
-var $elm$json$Json$Decode$string = _Json_decodeString;
-var $elm$html$Html$Events$targetValue = A2(
-	$elm$json$Json$Decode$at,
-	_List_fromArray(
-		['target', 'value']),
-	$elm$json$Json$Decode$string);
-var $elm$html$Html$Events$onInput = function (tagger) {
-	return A2(
-		$elm$html$Html$Events$stopPropagationOn,
-		'input',
-		A2(
-			$elm$json$Json$Decode$map,
-			$elm$html$Html$Events$alwaysStop,
-			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
-};
-var $elm$html$Html$option = _VirtualDom_node('option');
-var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
-var $elm$html$Html$select = _VirtualDom_node('select');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -5408,9 +5374,16 @@ var $elm$html$Html$Attributes$src = function (url) {
 };
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $elm$html$Html$textarea = _VirtualDom_node('textarea');
 var $elm$html$Html$ul = _VirtualDom_node('ul');
-var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $elm$core$Debug$todo = _Debug_todo;
+var $author$project$Recipe_Api$view = function (arg1) {
+	return _Debug_todo(
+		'Recipe_Api',
+		{
+			start: {line: 50, column: 5},
+			end: {line: 50, column: 15}
+		})('TODO');
+};
 var $author$project$Recipe$viewRecipe = function (recipe) {
 	return A2(
 		$elm$html$Html$div,
@@ -5564,185 +5537,29 @@ var $author$project$View$view = function (model) {
 									]))
 							]))
 					])),
-				A2($elm$html$Html$div, _List_Nil, _List_Nil),
 				A2(
-				$elm$html$Html$div,
+				$elm$html$Html$button,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('container')
+						$elm$html$Html$Events$onClick($author$project$Update$ToggleAddRecipeForm)
 					]),
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$input,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('input'),
-								$elm$html$Html$Attributes$placeholder('Name des Rezepts'),
-								$elm$html$Html$Events$onInput($author$project$Update$UpdateNameInput),
-								$elm$html$Html$Attributes$value(model.nameInput)
-							]),
-						_List_Nil),
-						A2(
-						$elm$html$Html$textarea,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('textarea'),
-								$elm$html$Html$Attributes$placeholder('Zutaten'),
-								$elm$html$Html$Events$onInput($author$project$Update$UpdateIngredientsInput),
-								$elm$html$Html$Attributes$value(model.ingredientsInput)
-							]),
-						_List_Nil),
-						A2(
-						$elm$html$Html$textarea,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('textarea'),
-								$elm$html$Html$Attributes$placeholder('Zubereitungsschritte'),
-								$elm$html$Html$Events$onInput($author$project$Update$UpdateStepsInput),
-								$elm$html$Html$Attributes$value(model.stepsInput)
-							]),
-						_List_Nil),
-						A2(
-						$elm$html$Html$input,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('input'),
-								$elm$html$Html$Attributes$placeholder('Zubereitungszeit in Minuten'),
-								$elm$html$Html$Events$onInput($author$project$Update$UpdateTimeInput),
-								$elm$html$Html$Attributes$value(model.timeInput)
-							]),
-						_List_Nil),
-						A2(
-						$elm$html$Html$select,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onInput($author$project$Update$UpdateDifficultyInput)
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$option,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$value('')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Schwierigkeitsgrad wählen')
-									])),
-								A2(
-								$elm$html$Html$option,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$value('leicht')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('leicht')
-									])),
-								A2(
-								$elm$html$Html$option,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$value('mittel')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('mittel')
-									])),
-								A2(
-								$elm$html$Html$option,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$value('schwer')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('schwer')
-									]))
-							])),
-						A2($elm$html$Html$div, _List_Nil, _List_Nil),
-						A2(
-						$elm$html$Html$select,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onInput($author$project$Update$UpdateCategoryInput)
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$option,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$value('')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Kategorie wählen')
-									])),
-								A2(
-								$elm$html$Html$option,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$value('Frühstück')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Frühstück')
-									])),
-								A2(
-								$elm$html$Html$option,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$value('Mittagessen')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Mittag-/Abendessen')
-									])),
-								A2(
-								$elm$html$Html$option,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$value('Dessert/Süßes')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Dessert/Süßes')
-									]))
-							])),
-						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('button'),
-								$elm$html$Html$Events$onClick($author$project$Update$AddRecipe)
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Rezept speichern')
-							])),
-						A2(
-						$elm$html$Html$h2,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Hier sind deine gespeicherten Lieblingsrezepte:')
-							])),
-						A2(
-						$elm$html$Html$ul,
-						_List_Nil,
-						_Utils_ap(
-							A2($elm$core$List$map, $author$project$Recipe$viewRecipe, model.recipes),
-							((model.nameInput !== '') || ((model.ingredientsInput !== '') || ((model.stepsInput !== '') || ((model.timeInput !== '') || ((model.difficultyInput !== '') || (model.categoryInput !== '')))))) ? A2(
-								$elm$core$List$map,
-								$author$project$Recipe$viewRecipe,
-								_List_fromArray(
-									[
-										{category: model.categoryInput, difficulty: model.difficultyInput, ingredients: model.ingredientsInput, name: model.nameInput, steps: model.stepsInput, time: model.timeInput}
-									])) : _List_Nil))
-					]))
+						$elm$html$Html$text(
+						model.showAddRecipeForm ? '-' : '+')
+					])),
+				model.showAddRecipeForm ? $author$project$Recipe_Api$view(model) : $elm$html$Html$text(''),
+				A2(
+				$elm$html$Html$h2,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Hier sind deine gespeicherten Lieblingsrezepte:')
+					])),
+				A2(
+				$elm$html$Html$ul,
+				_List_Nil,
+				A2($elm$core$List$map, $author$project$Recipe$viewRecipe, model.recipes))
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$application(

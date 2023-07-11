@@ -2,7 +2,7 @@ module Update exposing (Model, Msg(..), initialModel, update)
 
 import Browser.Navigation as Nav
 import Recipe exposing (Recipe)
-
+import Http
 
 type alias Model =
     { key : Nav.Key
@@ -13,6 +13,7 @@ type alias Model =
     , timeInput : String
     , difficultyInput : String
     , categoryInput : String
+    , showAddRecipeForm : Bool
     }
 
 
@@ -26,6 +27,7 @@ initialModel key =
     , timeInput = ""
     , difficultyInput = ""
     , categoryInput = ""
+    , showAddRecipeForm = False
     }
 
 
@@ -34,13 +36,14 @@ type Msg
     | ChangeUrl String
     | NoOp
     | SvgClicked Int
+    | ToggleAddRecipeForm
     | UpdateNameInput String
     | UpdateIngredientsInput String
     | UpdateStepsInput String
     | UpdateTimeInput String
     | UpdateDifficultyInput String
     | UpdateCategoryInput String
-
+    | GotRandomRecipe (Result Http.Error Recipe)
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -67,9 +70,12 @@ update msg model =
             ( model, Cmd.none )
 
         SvgClicked index ->
-                    -- hier kommt das Event rein, wenn man auf die SVG klickt, es soll ein random Frühsück,Mittagessen oder Dessert ausgegeben werden
+            -- hier kommt das Event rein, wenn man auf die SVG klickt, es soll ein random Frühsück,Mittagessen oder Dessert ausgegeben werden
 
             ( model, Cmd.none )
+
+        ToggleAddRecipeForm ->
+            ( { model | showAddRecipeForm = not model.showAddRecipeForm }, Cmd.none )
 
         UpdateNameInput newName ->
             ( { model | nameInput = newName }, Cmd.none )
@@ -88,3 +94,13 @@ update msg model =
 
         UpdateCategoryInput newCategory ->
             ( { model | categoryInput = newCategory }, Cmd.none )
+        
+        GotRandomRecipe result ->
+            case result of
+                Ok recipe ->
+                    -- Update the model with the new recipe
+                    ( { model | recipes = recipe :: model.recipes }, Cmd.none )
+
+                Err error ->
+                    -- Handle the error
+                    ( model, Cmd.none )
