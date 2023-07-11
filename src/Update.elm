@@ -70,7 +70,7 @@ update msg model =
             ( model, Cmd.none )
 
         SvgClicked index ->
-            -- hier kommt das Event rein, wenn man auf die SVG klickt, es soll ein random Frühsück,Mittagessen oder Dessert ausgegeben werden
+            -- hier kommt das Event rein, wenn man auf die SVG klickt, es soll ein random Frühsück, Mittagessen oder Dessert ausgegeben werden
 
             ( model, Cmd.none )
 
