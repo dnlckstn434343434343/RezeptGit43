@@ -1,4 +1,3 @@
--- In View.elm:
 module View exposing (view)
 
 import Recipe_Api
@@ -42,7 +41,6 @@ view model =
                 , div [class "svg.Unterschrift"] [ text "Dessert/Süßes" ]
                 ]
             ]
-            , div [] []
         , h2 [] [ text "Drücke auf das Plus und füge ein neues Rezept hinzu:" ]
         , button [ onClick ToggleAddRecipeForm ] 
             [ text (if model.showAddRecipeForm then "-" else "+") ]

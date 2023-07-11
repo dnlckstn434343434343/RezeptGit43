@@ -1,4 +1,3 @@
--- In Recipe_Api.elm:
 module Recipe_Api exposing (getRandomRecipe, Recipe_Api_Msg(..))
 
 import Http
