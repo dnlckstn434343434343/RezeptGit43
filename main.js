@@ -6564,6 +6564,14 @@ var $author$project$View$view = function (model) {
 								$elm$html$Html$text('Einkauflisten')
 							]))
 					])),
+				A2($elm$html$Html$div, _List_Nil, _List_Nil),
+				A2(
+				$elm$html$Html$h2,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Was kochst du heute? Klicke auf eine beliebige Kategorie und finde es heraus.')
+					])),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
@@ -6651,12 +6659,13 @@ var $author$project$View$view = function (model) {
 									]))
 							]))
 					])),
+				A2($elm$html$Html$div, _List_Nil, _List_Nil),
 				A2(
 				$elm$html$Html$h2,
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Drücke auf das Plus und füge ein neues Rezept hinzu:')
+						$elm$html$Html$text('Drücke auf das Plus und füge ein neues Rezept zu deiner Sammlung hinzu:')
 					])),
 				A2(
 				$elm$html$Html$button,
