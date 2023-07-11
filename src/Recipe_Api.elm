@@ -1,15 +1,18 @@
-module Recipe_Api exposing (getRandomRecipe, view, recipeDecoder)
+-- In Recipe_Api.elm:
+module Recipe_Api exposing (getRandomRecipe, Recipe_Api_Msg(..))
 
 import Http
 import Json.Decode as Decode exposing (Decoder)
-import Update exposing (Msg(..))
-import Update exposing (Model)
-import Html exposing (Html, div, input, text, button)
-import Html.Events exposing (onInput)
-import Html.Attributes exposing (placeholder)
-import Html.Events exposing (onClick)
 
-
+type alias Model =
+    { recipes : List Recipe
+    , nameInput : String
+    , ingredientsInput : String
+    , stepsInput : String
+    , timeInput : String
+    , difficultyInput : String
+    , categoryInput : String
+    }
 
 type alias Recipe =
     { name : String
@@ -20,23 +23,14 @@ type alias Recipe =
     , category : String
     }
 
-view : Model -> Html Msg
-view model =
-    div []
-        [ input [ placeholder "Name", onInput UpdateNameInput ] []
-        , input [ placeholder "Ingredients", onInput UpdateIngredientsInput ] []
-        , input [ placeholder "Steps", onInput UpdateStepsInput ] []
-        , input [ placeholder "Time", onInput UpdateTimeInput ] []
-        , input [ placeholder "Difficulty", onInput UpdateDifficultyInput ] []
-        , input [ placeholder "Category", onInput UpdateCategoryInput ] []
-        , button [ onClick AddRecipe ] [ text "Add Recipe" ]
-        ]
+type Recipe_Api_Msg
+    = GotRandomRecipe (Result Http.Error Recipe)
 
-getRandomRecipe : String -> Cmd Msg
+getRandomRecipe : String -> Cmd Recipe_Api_Msg
 getRandomRecipe category =
     let
         url =
-            "https://www.themealdb.com/api.php" ++ category
+            "https://www.themealdb.com/api/json/v1/1/random.php" ++ category
 
         request =
             Http.get
@@ -45,7 +39,6 @@ getRandomRecipe category =
                 }
     in
     request
-
 
 recipeDecoder : Decoder Recipe
 recipeDecoder =
@@ -56,7 +49,3 @@ recipeDecoder =
         (Decode.field "time" Decode.string)
         (Decode.field "difficulty" Decode.string)
         (Decode.field "category" Decode.string)
-
-
-
-

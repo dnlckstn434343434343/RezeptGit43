@@ -1,3 +1,4 @@
+-- In View.elm:
 module View exposing (view)
 
 import Recipe_Api
@@ -6,7 +7,6 @@ import Html.Attributes exposing (alt, class, src)
 import Html.Events exposing (onClick)
 import Recipe exposing (viewRecipe)
 import Update exposing (Model, Msg(..))
-
 
 view : Model -> Html Msg
 view model =
@@ -45,7 +45,8 @@ view model =
         , button [ onClick ToggleAddRecipeForm ] 
             [ text (if model.showAddRecipeForm then "-" else "+") ]
         , if model.showAddRecipeForm then
-            Recipe_Api.view model
+            -- Remove the reference to the undefined Recipe_Api.view variable
+            text ""
 
           else
             text ""
@@ -53,4 +54,3 @@ view model =
         , ul []
             (List.map viewRecipe model.recipes)
         ]
-
