@@ -6541,6 +6541,13 @@ var $author$project$View$view = function (model) {
 							]))
 					])),
 				A2(
+				$elm$html$Html$h2,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Drücke auf das Plus und füge ein neues Rezept hinzu:')
+					])),
+				A2(
 				$elm$html$Html$button,
 				_List_fromArray(
 					[
