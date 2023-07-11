@@ -26,6 +26,8 @@ view model =
             , a [ href "/lieblingsrezepte.html" ] [ text "Lieblingsrezepte" ]
             , a [ href "/einkauflisten.html" ] [ text "Einkauflisten" ]
             ]
+        , div [] []
+        , h2 [] [ text "Was kochst du heute? Klicke auf eine beliebige Kategorie und finde es heraus." ]
         , div [ class "svg-container" ]
             [ div []
                 [ img
@@ -55,7 +57,8 @@ view model =
                 , div [class "svg.Unterschrift"] [ text "Dessert/Süßes" ]
                 ]
             ]
-        , h2 [] [ text "Drücke auf das Plus und füge ein neues Rezept hinzu:" ]
+        , div [] []
+        , h2 [] [ text "Drücke auf das Plus und füge ein neues Rezept zu deiner Sammlung hinzu:" ]
         , button [ onClick ToggleAddRecipeForm ] 
         [ text (if model.showAddRecipeForm then "-" else "+") ]
         , if model.showAddRecipeForm then
