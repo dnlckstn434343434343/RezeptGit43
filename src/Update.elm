@@ -1,4 +1,3 @@
--- In Update.elm:
 module Update exposing (Model, Msg(..), initialModel, update)
 
 import Browser.Navigation as Nav
@@ -111,5 +110,5 @@ update msg model =
                   case result of 
                       Ok recipe ->
                           ( { model | recipes = recipe :: model.recipes }, Cmd.none )
-                      Err error ->
+                      Err error -> -- error muss noch provided werden
                           ( model, Cmd.none )
