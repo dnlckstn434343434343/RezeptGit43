@@ -2,7 +2,6 @@ module Update exposing (Model, Msg(..), initialModel, update)
 
 import Browser.Navigation as Nav
 import Recipe exposing (Recipe)
-import Http
 import Recipe_Api exposing (getRandomRecipe, Recipe_Api_Msg(..))
 
 type alias Model =
