@@ -1,4 +1,4 @@
-module Recipe_Api exposing (getRandomRecipe, view)
+module Recipe_Api exposing (getRandomRecipe, view, recipeDecoder)
 
 import Http
 import Json.Decode as Decode exposing (Decoder)
