@@ -1,6 +1,5 @@
 module View exposing (view)
 
-import Recipe_Api
 import Html exposing (Html, button, div, h2, img, text, ul)
 import Html.Attributes exposing (alt, class, src)
 import Html.Events exposing (onClick)
