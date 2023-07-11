@@ -84,7 +84,7 @@ update msg model =
           ( model, Cmd.map GotRandomApiMsg <| getRandomRecipe category )
 
       ToggleAddRecipeForm ->
-    ( { model | showAddRecipeForm = not model.showAddRecipeForm }, Cmd.none )
+          ( { model | showAddRecipeForm = not model.showAddRecipeForm }, Cmd.none )
 
       UpdateNameInput newName ->
           ( { model | nameInput = newName }, Cmd.none )
