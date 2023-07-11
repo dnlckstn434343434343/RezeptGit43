@@ -12,7 +12,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
-        , div [] [] 
+            , div [] [] 
         , div [ class "svg-container" ]
             [ div []
                 [ img
@@ -42,10 +42,12 @@ view model =
                 , div [class "svg.Unterschrift"] [ text "Dessert/Süßes" ]
                 ]
             ]
+            , div [] []
+        , h2 [] [ text "Drücke auf das Plus und füge ein neues Rezept hinzu:" ]
         , button [ onClick ToggleAddRecipeForm ] 
             [ text (if model.showAddRecipeForm then "-" else "+") ]
         , if model.showAddRecipeForm then
-            -- Remove the reference to the undefined Recipe_Api.view variable
+            
             text ""
 
           else
