@@ -1,7 +1,6 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html)
 import Update exposing (Model, Msg(..), update)
 import Url_Nav
 import View exposing (view)
