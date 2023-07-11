@@ -43,7 +43,7 @@ button {
 }
   
 button:hover {
-    background-color: #4CAF50; /* Grün */
+    background-color: #ff0404;
     color: white;
 }
 
