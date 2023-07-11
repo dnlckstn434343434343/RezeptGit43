@@ -1,8 +1,8 @@
 module View exposing (view)
 
 import Recipe_Api
-import Html exposing (Html, button, div, h2, img, text, ul)
-import Html.Attributes exposing (alt, class, src)
+import Html exposing (Html, button, div, h2, img, text, ul, a)
+import Html.Attributes exposing (alt, class, src, href)
 import Html.Events exposing (onClick)
 import Recipe exposing (viewRecipe)
 import Update exposing (Model, Msg(..))
@@ -10,8 +10,9 @@ import Update exposing (Model, Msg(..))
 view : Model -> Html Msg
 view model =
     div []
-        [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
-            , div [] [] 
+        [ a [ href "/index.html" ]
+            [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] [] ]
+        , div [] []
         , div [ class "svg-container" ]
             [ div []
                 [ img
