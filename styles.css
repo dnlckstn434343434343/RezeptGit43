@@ -78,7 +78,7 @@ img {
 .header-links {
     color: #ff0404;
     display: flex;
-    justify-content: center;
+    justify-content: left;
 }
 
 .header-links a {
