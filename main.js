@@ -6221,7 +6221,7 @@ var $author$project$Recipe_Api$recipeDecoder = A7(
 	A2($elm$json$Json$Decode$field, 'difficulty', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'category', $elm$json$Json$Decode$string));
 var $author$project$Recipe_Api$getRandomRecipe = function (category) {
-	var url = 'https://www.themealdb.com/api/json/v1/1/random.php' + category;
+	var url = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=' + category;
 	var request = $elm$http$Http$get(
 		{
 			expect: A2($elm$http$Http$expectJson, $author$project$Recipe_Api$GotRandomRecipe, $author$project$Recipe_Api$recipeDecoder),
@@ -6347,6 +6347,7 @@ var $author$project$Update$SvgClicked = function (a) {
 	return {$: 'SvgClicked', a: a};
 };
 var $author$project$Update$ToggleAddRecipeForm = {$: 'ToggleAddRecipeForm'};
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6360,6 +6361,12 @@ var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
@@ -6444,14 +6451,23 @@ var $author$project$View$view = function (model) {
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$img,
+				$elm$html$Html$a,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('img'),
-						$elm$html$Html$Attributes$src('./Bilder/Logo.jpg'),
-						$elm$html$Html$Attributes$alt('Logo')
+						$elm$html$Html$Attributes$href('/index.html')
 					]),
-				_List_Nil),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$img,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('img'),
+								$elm$html$Html$Attributes$src('./Bilder/Logo.jpg'),
+								$elm$html$Html$Attributes$alt('Logo')
+							]),
+						_List_Nil)
+					])),
 				A2($elm$html$Html$div, _List_Nil, _List_Nil),
 				A2(
 				$elm$html$Html$div,
