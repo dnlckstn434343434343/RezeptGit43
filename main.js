@@ -6343,10 +6343,30 @@ var $author$project$Update$update = F2(
 				}
 		}
 	});
+var $author$project$Update$AddRecipe = {$: 'AddRecipe'};
 var $author$project$Update$SvgClicked = function (a) {
 	return {$: 'SvgClicked', a: a};
 };
 var $author$project$Update$ToggleAddRecipeForm = {$: 'ToggleAddRecipeForm'};
+var $author$project$Update$UpdateCategoryInput = function (a) {
+	return {$: 'UpdateCategoryInput', a: a};
+};
+var $author$project$Update$UpdateDifficultyInput = function (a) {
+	return {$: 'UpdateDifficultyInput', a: a};
+};
+var $author$project$Update$UpdateIngredientsInput = function (a) {
+	return {$: 'UpdateIngredientsInput', a: a};
+};
+var $author$project$Update$UpdateNameInput = function (a) {
+	return {$: 'UpdateNameInput', a: a};
+};
+var $author$project$Update$UpdateStepsInput = function (a) {
+	return {$: 'UpdateStepsInput', a: a};
+};
+var $author$project$Update$UpdateTimeInput = function (a) {
+	return {$: 'UpdateTimeInput', a: a};
+};
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6360,7 +6380,14 @@ var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var $elm$html$Html$img = _VirtualDom_node('img');
+var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -6378,6 +6405,40 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
+var $elm$html$Html$option = _VirtualDom_node('option');
+var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
+var $elm$html$Html$select = _VirtualDom_node('select');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -6386,7 +6447,9 @@ var $elm$html$Html$Attributes$src = function (url) {
 };
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$html$Html$textarea = _VirtualDom_node('textarea');
 var $elm$html$Html$ul = _VirtualDom_node('ul');
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Recipe$viewRecipe = function (recipe) {
 	return A2(
 		$elm$html$Html$div,
@@ -6444,14 +6507,23 @@ var $author$project$View$view = function (model) {
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$img,
+				$elm$html$Html$a,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('img'),
-						$elm$html$Html$Attributes$src('./Bilder/Logo.jpg'),
-						$elm$html$Html$Attributes$alt('Logo')
+						$elm$html$Html$Attributes$href('/index.html')
 					]),
-				_List_Nil),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$img,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('img'),
+								$elm$html$Html$Attributes$src('./Bilder/Logo.jpg'),
+								$elm$html$Html$Attributes$alt('Logo')
+							]),
+						_List_Nil)
+					])),
 				A2($elm$html$Html$div, _List_Nil, _List_Nil),
 				A2(
 				$elm$html$Html$div,
@@ -6558,7 +6630,152 @@ var $author$project$View$view = function (model) {
 						$elm$html$Html$text(
 						model.showAddRecipeForm ? '-' : '+')
 					])),
-				model.showAddRecipeForm ? $elm$html$Html$text('') : $elm$html$Html$text(''),
+				model.showAddRecipeForm ? A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$input,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$placeholder('Name'),
+								$elm$html$Html$Events$onInput($author$project$Update$UpdateNameInput)
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$input,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$placeholder('Ingredients'),
+								$elm$html$Html$Events$onInput($author$project$Update$UpdateIngredientsInput)
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$textarea,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$placeholder('Steps'),
+								$elm$html$Html$Events$onInput($author$project$Update$UpdateStepsInput)
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$input,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$placeholder('Time'),
+								$elm$html$Html$Events$onInput($author$project$Update$UpdateTimeInput)
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$select,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onInput($author$project$Update$UpdateDifficultyInput)
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$value('')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Select Difficulty')
+									])),
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$value('Leicht')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Leicht')
+									])),
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$value('Mittel')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Mittel')
+									])),
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$value('Schwer')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Schwer')
+									]))
+							])),
+						A2(
+						$elm$html$Html$select,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onInput($author$project$Update$UpdateCategoryInput)
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$value('')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Select Category')
+									])),
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$value('Frühstück')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Frühstück')
+									])),
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$value('Mittag-/Abendessen')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Mittag-/Abendessen')
+									])),
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$value('Dessert/Süßes')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Dessert/Süßes')
+									]))
+							])),
+						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onClick($author$project$Update$AddRecipe)
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Add Recipe')
+							]))
+					])) : $elm$html$Html$text(''),
 				A2(
 				$elm$html$Html$h2,
 				_List_Nil,
