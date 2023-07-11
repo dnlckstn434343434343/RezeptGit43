@@ -20,7 +20,12 @@ view model =
     div []
         [ a [ href "/index.html" ]
             [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] [] ]
-        , div [] [] 
+        , div [] []
+        , div [ class "header-links" ]
+            [ a [ href "/index.html" ] [ text "Startseite" ]
+            , a [ href "/lieblingsrezepte.html" ] [ text "Lieblingsrezepte" ]
+            , a [ href "/einkauflisten.html" ] [ text "Einkauflisten" ]
+            ]
         , div [ class "svg-container" ]
             [ div []
                 [ img

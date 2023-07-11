@@ -6529,6 +6529,45 @@ var $author$project$View$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
+						$elm$html$Html$Attributes$class('header-links')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$href('/index.html')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Startseite')
+							])),
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$href('/lieblingsrezepte.html')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Lieblingsrezepte')
+							])),
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$href('/einkauflisten.html')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Einkauflisten')
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
 						$elm$html$Html$Attributes$class('svg-container')
 					]),
 				_List_fromArray(
