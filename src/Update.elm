@@ -98,9 +98,9 @@ update msg model =
         GotRandomRecipe result ->
             case result of
                 Ok recipe ->
-                    -- Update the model with the new recipe
+                    -- Hier muss jetzt das Update des neuen Rezepts rein
                     ( { model | recipes = recipe :: model.recipes }, Cmd.none )
 
                 Err error ->
-                    -- Handle the error
+                    -- Hier muss noch eine Error-Msg rein
                     ( model, Cmd.none )
