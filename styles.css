@@ -74,3 +74,13 @@ img {
 .svg.Unterschrift { /*wird das übernommen? nochmal Selektoren anschauen*/
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.header-links {
+    color: #ff0404;
+    display: flex;
+    justify-content: center;
+}
+
+.header-links a {
+    margin: 0 10px;
+}
