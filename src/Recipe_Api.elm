@@ -21,7 +21,7 @@ getRandomRecipe : String -> Cmd Recipe_Api_Msg
 getRandomRecipe category =
     let
         url =
-            "https://www.themealdb.com/api/json/v1/1/random.php" ++ category
+            "www.themealdb.com/api/json/v1/1/categories.php" ++ category
 
         request =
             Http.get

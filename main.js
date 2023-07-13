@@ -6221,7 +6221,7 @@ var $author$project$Recipe_Api$recipeDecoder = A7(
 	A2($elm$json$Json$Decode$field, 'difficulty', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'category', $elm$json$Json$Decode$string));
 var $author$project$Recipe_Api$getRandomRecipe = function (category) {
-	var url = 'https://www.themealdb.com/api/json/v1/1/random.php' + category;
+	var url = 'www.themealdb.com/api/json/v1/1/categories.php' + category;
 	var request = $elm$http$Http$get(
 		{
 			expect: A2($elm$http$Http$expectJson, $author$project$Recipe_Api$GotRandomRecipe, $author$project$Recipe_Api$recipeDecoder),
