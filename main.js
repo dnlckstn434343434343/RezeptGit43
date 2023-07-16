@@ -4370,6 +4370,7 @@ function _Browser_load(url)
 		}
 	}));
 }
+var $author$project$Main$init = {};
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -5158,163 +5159,31 @@ var $elm$core$Task$perform = F2(
 			$elm$core$Task$Perform(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
-var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Main$EinkaufslistenMsg = function (a) {
-	return {$: 'EinkaufslistenMsg', a: a};
-};
-var $author$project$Main$LieblingsrezepteMsg = function (a) {
-	return {$: 'LieblingsrezepteMsg', a: a};
-};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $author$project$Einkaufslisten$initialModel = {cartItems: _List_Nil, draggedItem: $elm$core$Maybe$Nothing};
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Einkaufslisten$init = function (_v0) {
-	return _Utils_Tuple2($author$project$Einkaufslisten$initialModel, $elm$core$Platform$Cmd$none);
-};
-var $author$project$Lieblingsrezepte$NewRecipe = F2(
-	function (name, ingredients) {
-		return {ingredients: ingredients, name: name};
-	});
-var $author$project$Lieblingsrezepte$init = function (_v0) {
-	return _Utils_Tuple2(
-		{
-			newRecipe: A2($author$project$Lieblingsrezepte$NewRecipe, '', ''),
-			recipes: _List_Nil
-		},
-		$elm$core$Platform$Cmd$none);
-};
-var $elm$core$Platform$Cmd$map = _Platform_map;
-var $author$project$Main$init = function (_v0) {
-	var _v1 = $author$project$Lieblingsrezepte$init(_Utils_Tuple0);
-	var lieblingsrezepteModel = _v1.a;
-	var lieblingsrezepteCmd = _v1.b;
-	var _v2 = $author$project$Einkaufslisten$init(_Utils_Tuple0);
-	var einkaufslistenModel = _v2.a;
-	var einkaufslistenCmd = _v2.b;
-	return _Utils_Tuple2(
-		{einkaufslistenModel: einkaufslistenModel, lieblingsrezepteModel: lieblingsrezepteModel},
-		$elm$core$Platform$Cmd$batch(
-			_List_fromArray(
-				[
-					A2($elm$core$Platform$Cmd$map, $author$project$Main$LieblingsrezepteMsg, lieblingsrezepteCmd),
-					A2($elm$core$Platform$Cmd$map, $author$project$Main$EinkaufslistenMsg, einkaufslistenCmd)
-				])));
-};
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $author$project$Einkaufslisten$update = F2(
-	function (msg, model) {
-		switch (msg.$) {
-			case 'DragStart':
-				var item = msg.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							draggedItem: $elm$core$Maybe$Just(item)
-						}),
-					$elm$core$Platform$Cmd$none);
-			case 'DragEnd':
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{draggedItem: $elm$core$Maybe$Nothing}),
-					$elm$core$Platform$Cmd$none);
-			case 'DragEnter':
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-			case 'DragOver':
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-			case 'DragLeave':
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-			case 'Drop':
-				var _v1 = model.draggedItem;
-				if (_v1.$ === 'Just') {
-					var item = _v1.a;
+var $elm$browser$Browser$sandbox = function (impl) {
+	return _Browser_element(
+		{
+			init: function (_v0) {
+				return _Utils_Tuple2(impl.init, $elm$core$Platform$Cmd$none);
+			},
+			subscriptions: function (_v1) {
+				return $elm$core$Platform$Sub$none;
+			},
+			update: F2(
+				function (msg, model) {
 					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								cartItems: A2($elm$core$List$cons, item, model.cartItems),
-								draggedItem: $elm$core$Maybe$Nothing
-							}),
+						A2(impl.update, msg, model),
 						$elm$core$Platform$Cmd$none);
-				} else {
-					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-				}
-			default:
-				var item = msg.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							cartItems: A2($elm$core$List$cons, item, model.cartItems)
-						}),
-					$elm$core$Platform$Cmd$none);
-		}
-	});
-var $author$project$Lieblingsrezepte$update = F2(
-	function (msg, _v0) {
-		var recipes = _v0.recipes;
-		var newRecipe = _v0.newRecipe;
-		switch (msg.$) {
-			case 'AddRecipe':
-				var newId = $elm$core$List$length(recipes) + 1;
-				var newRecipeItem = {
-					id: newId,
-					ingredients: A2($elm$core$String$split, ',', newRecipe.ingredients),
-					name: newRecipe.name
-				};
-				return _Utils_Tuple2(
-					{
-						newRecipe: A2($author$project$Lieblingsrezepte$NewRecipe, '', ''),
-						recipes: A2($elm$core$List$cons, newRecipeItem, recipes)
-					},
-					$elm$core$Platform$Cmd$none);
-			case 'UpdateNewRecipeName':
-				var newName = msg.a;
-				return _Utils_Tuple2(
-					{
-						newRecipe: _Utils_update(
-							newRecipe,
-							{name: newName}),
-						recipes: recipes
-					},
-					$elm$core$Platform$Cmd$none);
-			default:
-				var newIngredients = msg.a;
-				return _Utils_Tuple2(
-					{
-						newRecipe: _Utils_update(
-							newRecipe,
-							{ingredients: newIngredients}),
-						recipes: recipes
-					},
-					$elm$core$Platform$Cmd$none);
-		}
-	});
+				}),
+			view: impl.view
+		});
+};
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		if (msg.$ === 'LieblingsrezepteMsg') {
-			var subMsg = msg.a;
-			var _v1 = A2($author$project$Lieblingsrezepte$update, subMsg, model.lieblingsrezepteModel);
-			var updatedLieblingsrezepteModel = _v1.a;
-			var lieblingsrezepteCmd = _v1.b;
-			return _Utils_Tuple2(
-				_Utils_update(
-					model,
-					{lieblingsrezepteModel: updatedLieblingsrezepteModel}),
-				A2($elm$core$Platform$Cmd$map, $author$project$Main$LieblingsrezepteMsg, lieblingsrezepteCmd));
-		} else {
-			var subMsg = msg.a;
-			var _v2 = A2($author$project$Einkaufslisten$update, subMsg, model.einkaufslistenModel);
-			var updatedEinkaufslistenModel = _v2.a;
-			var einkaufslistenCmd = _v2.b;
-			return _Utils_Tuple2(
-				_Utils_update(
-					model,
-					{einkaufslistenModel: updatedEinkaufslistenModel}),
-				A2($elm$core$Platform$Cmd$map, $author$project$Main$EinkaufslistenMsg, einkaufslistenCmd));
-		}
+		return model;
 	});
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
@@ -5328,7 +5197,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -5336,8 +5205,6 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$img = _VirtualDom_node('img');
-var $elm$virtual_dom$VirtualDom$map = _VirtualDom_map;
-var $elm$html$Html$map = $elm$virtual_dom$VirtualDom$map;
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -5346,329 +5213,13 @@ var $elm$html$Html$Attributes$src = function (url) {
 };
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Einkaufslisten$availableFoodItems = _List_fromArray(
-	['apple', 'banana', 'carrot', 'tomato']);
-var $elm$svg$Svg$Attributes$class = _VirtualDom_attribute('class');
-var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
-var $elm$svg$Svg$Attributes$fontSize = _VirtualDom_attribute('font-size');
-var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
-var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
-var $elm$svg$Svg$image = $elm$svg$Svg$trustedNode('image');
-var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
-var $elm$svg$Svg$Attributes$textAnchor = _VirtualDom_attribute('text-anchor');
-var $elm$svg$Svg$text_ = $elm$svg$Svg$trustedNode('text');
-var $elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
-var $elm$svg$Svg$Attributes$x = _VirtualDom_attribute('x');
-var $elm$svg$Svg$Attributes$y = _VirtualDom_attribute('y');
-var $author$project$Einkaufslisten$viewCartItem = F2(
-	function (model, item) {
-		return A2(
-			$elm$svg$Svg$text_,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$x('50'),
-					$elm$svg$Svg$Attributes$y(
-					$elm$core$String$fromInt(
-						120 + (20 * $elm$core$List$length(model.cartItems)))),
-					$elm$svg$Svg$Attributes$textAnchor('middle'),
-					$elm$svg$Svg$Attributes$fontSize('14'),
-					$elm$svg$Svg$Attributes$fill('#666')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text(item)
-				]));
-	});
-var $author$project$Einkaufslisten$AddToCart = function (a) {
-	return {$: 'AddToCart', a: a};
-};
-var $author$project$Einkaufslisten$DragEnd = {$: 'DragEnd'};
-var $author$project$Einkaufslisten$DragEnter = {$: 'DragEnter'};
-var $author$project$Einkaufslisten$DragLeave = {$: 'DragLeave'};
-var $author$project$Einkaufslisten$DragOver = {$: 'DragOver'};
-var $author$project$Einkaufslisten$DragStart = function (a) {
-	return {$: 'DragStart', a: a};
-};
-var $elm$html$Html$Attributes$draggable = _VirtualDom_attribute('draggable');
-var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var $elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
-var $author$project$Einkaufslisten$viewFoodItem = F2(
-	function (_v0, item) {
-		var _v1 = _List_fromArray(
-			[
-				$elm$html$Html$Attributes$draggable('true'),
-				A2(
-				$elm$html$Html$Events$on,
-				'dragstart',
-				$elm$json$Json$Decode$succeed(
-					$author$project$Einkaufslisten$DragStart(item))),
-				A2(
-				$elm$html$Html$Events$on,
-				'dragend',
-				$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragEnd)),
-				A2(
-				$elm$html$Html$Events$on,
-				'dragover',
-				$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragOver)),
-				A2(
-				$elm$html$Html$Events$on,
-				'dragenter',
-				$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragEnter)),
-				A2(
-				$elm$html$Html$Events$on,
-				'dragleave',
-				$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragLeave)),
-				A2(
-				$elm$html$Html$Events$on,
-				'drop',
-				$elm$json$Json$Decode$succeed(
-					$author$project$Einkaufslisten$AddToCart(item)))
-			]);
-		return A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('food-item')
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$img,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$src('./SVGs/' + (item + '.svg')),
-							$elm$html$Html$Attributes$draggable('false')
-						]),
-					_List_Nil),
-					$elm$html$Html$text(item)
-				]));
-	});
-var $elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
-var $elm$svg$Svg$Attributes$xlinkHref = function (value) {
-	return A3(
-		_VirtualDom_attributeNS,
-		'http://www.w3.org/1999/xlink',
-		'xlink:href',
-		_VirtualDom_noJavaScriptUri(value));
-};
-var $author$project$Einkaufslisten$view = function (model) {
-	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('food-items')
-					]),
-				A2(
-					$elm$core$List$map,
-					$author$project$Einkaufslisten$viewFoodItem(model),
-					$author$project$Einkaufslisten$availableFoodItems)),
-				A2(
-				$elm$svg$Svg$svg,
-				_List_fromArray(
-					[
-						$elm$svg$Svg$Attributes$class('shopping-cart'),
-						$elm$svg$Svg$Attributes$viewBox('0 0 100 100')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$svg$Svg$image,
-						_List_fromArray(
-							[
-								$elm$svg$Svg$Attributes$xlinkHref('./SVGs/einkaufswagen.svg'),
-								$elm$svg$Svg$Attributes$width('100'),
-								$elm$svg$Svg$Attributes$height('100')
-							]),
-						_List_Nil),
-						A2(
-						$elm$svg$Svg$text_,
-						_List_fromArray(
-							[
-								$elm$svg$Svg$Attributes$x('50'),
-								$elm$svg$Svg$Attributes$y('150'),
-								$elm$svg$Svg$Attributes$textAnchor('middle'),
-								$elm$svg$Svg$Attributes$fontSize('14'),
-								$elm$svg$Svg$Attributes$fill('#666')
-							]),
-						A2(
-							$elm$core$List$map,
-							$author$project$Einkaufslisten$viewCartItem(model),
-							model.cartItems))
-					]))
-			]));
-};
-var $author$project$Lieblingsrezepte$AddRecipe = {$: 'AddRecipe'};
-var $elm$html$Html$button = _VirtualDom_node('button');
-var $elm$html$Html$Events$onClick = function (msg) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'click',
-		$elm$json$Json$Decode$succeed(msg));
-};
-var $author$project$Lieblingsrezepte$UpdateNewRecipeIngredients = function (a) {
-	return {$: 'UpdateNewRecipeIngredients', a: a};
-};
-var $author$project$Lieblingsrezepte$UpdateNewRecipeName = function (a) {
-	return {$: 'UpdateNewRecipeName', a: a};
-};
-var $elm$html$Html$h3 = _VirtualDom_node('h3');
-var $elm$html$Html$input = _VirtualDom_node('input');
-var $elm$html$Html$label = _VirtualDom_node('label');
-var $elm$html$Html$Events$alwaysStop = function (x) {
-	return _Utils_Tuple2(x, true);
-};
-var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
-	return {$: 'MayStopPropagation', a: a};
-};
-var $elm$html$Html$Events$stopPropagationOn = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
-	});
-var $elm$json$Json$Decode$field = _Json_decodeField;
-var $elm$json$Json$Decode$at = F2(
-	function (fields, decoder) {
-		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
-	});
-var $elm$json$Json$Decode$string = _Json_decodeString;
-var $elm$html$Html$Events$targetValue = A2(
-	$elm$json$Json$Decode$at,
-	_List_fromArray(
-		['target', 'value']),
-	$elm$json$Json$Decode$string);
-var $elm$html$Html$Events$onInput = function (tagger) {
-	return A2(
-		$elm$html$Html$Events$stopPropagationOn,
-		'input',
-		A2(
-			$elm$json$Json$Decode$map,
-			$elm$html$Html$Events$alwaysStop,
-			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
-};
-var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
-var $author$project$Lieblingsrezepte$viewNewRecipeForm = function (newRecipe) {
-	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$h3,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Neues Rezept hinzufügen')
-					])),
-				A2(
-				$elm$html$Html$label,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Name:')
-					])),
-				A2(
-				$elm$html$Html$input,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$value(newRecipe.name),
-						$elm$html$Html$Events$onInput($author$project$Lieblingsrezepte$UpdateNewRecipeName)
-					]),
-				_List_Nil),
-				A2(
-				$elm$html$Html$label,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Zutaten (durch Kommas getrennt):')
-					])),
-				A2(
-				$elm$html$Html$input,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$value(newRecipe.ingredients),
-						$elm$html$Html$Events$onInput($author$project$Lieblingsrezepte$UpdateNewRecipeIngredients)
-					]),
-				_List_Nil)
-			]));
-};
-var $elm$html$Html$ul = _VirtualDom_node('ul');
-var $elm$html$Html$li = _VirtualDom_node('li');
-var $author$project$Lieblingsrezepte$viewRecipe = function (recipe) {
-	return A2(
-		$elm$html$Html$li,
-		_List_Nil,
-		_List_fromArray(
-			[
-				$elm$html$Html$text(
-				recipe.name + (': ' + A2($elm$core$String$join, ', ', recipe.ingredients)))
-			]));
-};
-var $author$project$Lieblingsrezepte$viewRecipeList = function (recipes) {
-	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$h3,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Rezepte')
-					])),
-				A2(
-				$elm$html$Html$ul,
-				_List_Nil,
-				A2($elm$core$List$map, $author$project$Lieblingsrezepte$viewRecipe, recipes))
-			]));
-};
-var $author$project$Lieblingsrezepte$view = function (model) {
-	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$h2,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Lieblingsrezepte')
-					])),
-				$author$project$Lieblingsrezepte$viewNewRecipeForm(model.newRecipe),
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onClick($author$project$Lieblingsrezepte$AddRecipe)
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Rezept hinzufügen')
-					])),
-				$author$project$Lieblingsrezepte$viewRecipeList(model.recipes)
-			]));
-};
 var $author$project$Main$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
-		_List_Nil,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('container')
+			]),
 		_List_fromArray(
 			[
 				A2(
@@ -5731,8 +5282,11 @@ var $author$project$Main$view = function (model) {
 					])),
 				A2($elm$html$Html$div, _List_Nil, _List_Nil),
 				A2(
-				$elm$html$Html$h2,
-				_List_Nil,
+				$elm$html$Html$h1,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('h1')
+					]),
 				_List_fromArray(
 					[
 						$elm$html$Html$text('Was kochst du heute? Klicke auf eine beliebige Kategorie und finde es heraus.')
@@ -5762,7 +5316,7 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('svg.Unterschrift')
+										$elm$html$Html$Attributes$class('svg Unterschrift')
 									]),
 								_List_fromArray(
 									[
@@ -5786,7 +5340,7 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('svg.Unterschrift')
+										$elm$html$Html$Attributes$class('svg Unterschrift')
 									]),
 								_List_fromArray(
 									[
@@ -5810,45 +5364,17 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('svg.Unterschrift')
+										$elm$html$Html$Attributes$class('svg Unterschrift')
 									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Dessert/Süßes')
 									]))
-							])),
-						A2($elm$html$Html$div, _List_Nil, _List_Nil),
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$map,
-								$author$project$Main$LieblingsrezepteMsg,
-								$author$project$Lieblingsrezepte$view(model.lieblingsrezepteModel))
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$map,
-								$author$project$Main$EinkaufslistenMsg,
-								$author$project$Einkaufslisten$view(model.einkaufslistenModel))
 							]))
 					]))
 			]));
 };
-var $author$project$Main$main = $elm$browser$Browser$element(
-	{
-		init: $author$project$Main$init,
-		subscriptions: function (_v0) {
-			return $elm$core$Platform$Sub$none;
-		},
-		update: $author$project$Main$update,
-		view: $author$project$Main$view
-	});
+var $author$project$Main$main = $elm$browser$Browser$sandbox(
+	{init: $author$project$Main$init, update: $author$project$Main$update, view: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
