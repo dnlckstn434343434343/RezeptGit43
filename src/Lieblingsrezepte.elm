@@ -5,8 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
 import Json.Decode exposing (Decoder)
-import Json.Encode exposing (Value, list, object, string, int, bool)
-import Url exposing (Url)
+import Json.Encode exposing (Value)
 
 
 -- Model

@@ -83,6 +83,7 @@ view model =
                     []
                 , div [class "svg.Unterschrift"] [ text "Dessert/Süßes" ]
                 ]
+            , div [] [] 
             , div [] [ Lieblingsrezepte.view model.lieblingsrezepteModel |> Html.map LieblingsrezepteMsg ]
             , div [] [ Einkaufslisten.view model.einkaufslistenModel |> Html.map EinkaufslistenMsg ]
             ]
