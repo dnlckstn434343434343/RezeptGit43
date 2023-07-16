@@ -5226,7 +5226,7 @@ var $author$project$Einkaufslisten$update = F2(
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			case 'DragLeave':
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-			default:
+			case 'Drop':
 				var _v1 = model.draggedItem;
 				if (_v1.$ === 'Just') {
 					var item = _v1.a;
@@ -5241,6 +5241,15 @@ var $author$project$Einkaufslisten$update = F2(
 				} else {
 					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 				}
+			default:
+				var item = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							cartItems: A2($elm$core$List$cons, item, model.cartItems)
+						}),
+					$elm$core$Platform$Cmd$none);
 		}
 	});
 var $author$project$Lieblingsrezepte$update = F2(
@@ -5344,13 +5353,34 @@ var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
 var $elm$svg$Svg$Attributes$fontSize = _VirtualDom_attribute('font-size');
 var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
 var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
-var $elm$svg$Svg$rect = $elm$svg$Svg$trustedNode('rect');
+var $elm$svg$Svg$image = $elm$svg$Svg$trustedNode('image');
 var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
 var $elm$svg$Svg$Attributes$textAnchor = _VirtualDom_attribute('text-anchor');
 var $elm$svg$Svg$text_ = $elm$svg$Svg$trustedNode('text');
 var $elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
-var $author$project$Einkaufslisten$viewCartItem = function (item) {
-	return $elm$html$Html$text(item);
+var $elm$svg$Svg$Attributes$x = _VirtualDom_attribute('x');
+var $elm$svg$Svg$Attributes$y = _VirtualDom_attribute('y');
+var $author$project$Einkaufslisten$viewCartItem = F2(
+	function (model, item) {
+		return A2(
+			$elm$svg$Svg$text_,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$x('50'),
+					$elm$svg$Svg$Attributes$y(
+					$elm$core$String$fromInt(
+						120 + (20 * $elm$core$List$length(model.cartItems)))),
+					$elm$svg$Svg$Attributes$textAnchor('middle'),
+					$elm$svg$Svg$Attributes$fontSize('14'),
+					$elm$svg$Svg$Attributes$fill('#666')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(item)
+				]));
+	});
+var $author$project$Einkaufslisten$AddToCart = function (a) {
+	return {$: 'AddToCart', a: a};
 };
 var $author$project$Einkaufslisten$DragEnd = {$: 'DragEnd'};
 var $author$project$Einkaufslisten$DragEnter = {$: 'DragEnter'};
@@ -5359,7 +5389,6 @@ var $author$project$Einkaufslisten$DragOver = {$: 'DragOver'};
 var $author$project$Einkaufslisten$DragStart = function (a) {
 	return {$: 'DragStart', a: a};
 };
-var $author$project$Einkaufslisten$Drop = {$: 'Drop'};
 var $elm$html$Html$Attributes$draggable = _VirtualDom_attribute('draggable');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
@@ -5385,30 +5414,30 @@ var $author$project$Einkaufslisten$viewFoodItem = F2(
 				A2(
 				$elm$html$Html$Events$on,
 				'dragend',
-				$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragEnd))
+				$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragEnd)),
+				A2(
+				$elm$html$Html$Events$on,
+				'dragover',
+				$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragOver)),
+				A2(
+				$elm$html$Html$Events$on,
+				'dragenter',
+				$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragEnter)),
+				A2(
+				$elm$html$Html$Events$on,
+				'dragleave',
+				$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragLeave)),
+				A2(
+				$elm$html$Html$Events$on,
+				'drop',
+				$elm$json$Json$Decode$succeed(
+					$author$project$Einkaufslisten$AddToCart(item)))
 			]);
 		return A2(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('food-item'),
-					$elm$html$Html$Attributes$draggable('true'),
-					A2(
-					$elm$html$Html$Events$on,
-					'dragover',
-					$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragOver)),
-					A2(
-					$elm$html$Html$Events$on,
-					'dragenter',
-					$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragEnter)),
-					A2(
-					$elm$html$Html$Events$on,
-					'dragleave',
-					$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$DragLeave)),
-					A2(
-					$elm$html$Html$Events$on,
-					'drop',
-					$elm$json$Json$Decode$succeed($author$project$Einkaufslisten$Drop))
+					$elm$html$Html$Attributes$class('food-item')
 				]),
 			_List_fromArray(
 				[
@@ -5424,8 +5453,13 @@ var $author$project$Einkaufslisten$viewFoodItem = F2(
 				]));
 	});
 var $elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
-var $elm$svg$Svg$Attributes$x = _VirtualDom_attribute('x');
-var $elm$svg$Svg$Attributes$y = _VirtualDom_attribute('y');
+var $elm$svg$Svg$Attributes$xlinkHref = function (value) {
+	return A3(
+		_VirtualDom_attributeNS,
+		'http://www.w3.org/1999/xlink',
+		'xlink:href',
+		_VirtualDom_noJavaScriptUri(value));
+};
 var $author$project$Einkaufslisten$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -5452,12 +5486,12 @@ var $author$project$Einkaufslisten$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$svg$Svg$rect,
+						$elm$svg$Svg$image,
 						_List_fromArray(
 							[
+								$elm$svg$Svg$Attributes$xlinkHref('./SVGs/einkaufswagen.svg'),
 								$elm$svg$Svg$Attributes$width('100'),
-								$elm$svg$Svg$Attributes$height('100'),
-								$elm$svg$Svg$Attributes$fill('#f5f5f5')
+								$elm$svg$Svg$Attributes$height('100')
 							]),
 						_List_Nil),
 						A2(
@@ -5465,40 +5499,15 @@ var $author$project$Einkaufslisten$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$svg$Svg$Attributes$x('50'),
-								$elm$svg$Svg$Attributes$y('50'),
-								$elm$svg$Svg$Attributes$textAnchor('middle'),
-								$elm$svg$Svg$Attributes$fontSize('20'),
-								$elm$svg$Svg$Attributes$fill('#333')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Shopping Cart')
-							])),
-						A2(
-						$elm$svg$Svg$text_,
-						_List_fromArray(
-							[
-								$elm$svg$Svg$Attributes$x('50'),
-								$elm$svg$Svg$Attributes$y('80'),
+								$elm$svg$Svg$Attributes$y('150'),
 								$elm$svg$Svg$Attributes$textAnchor('middle'),
 								$elm$svg$Svg$Attributes$fontSize('14'),
 								$elm$svg$Svg$Attributes$fill('#666')
 							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Drag food items here')
-							])),
 						A2(
-						$elm$svg$Svg$text_,
-						_List_fromArray(
-							[
-								$elm$svg$Svg$Attributes$x('50'),
-								$elm$svg$Svg$Attributes$y('110'),
-								$elm$svg$Svg$Attributes$textAnchor('middle'),
-								$elm$svg$Svg$Attributes$fontSize('14'),
-								$elm$svg$Svg$Attributes$fill('#666')
-							]),
-						A2($elm$core$List$map, $author$project$Einkaufslisten$viewCartItem, model.cartItems))
+							$elm$core$List$map,
+							$author$project$Einkaufslisten$viewCartItem(model),
+							model.cartItems))
 					]))
 			]));
 };
