@@ -48,9 +48,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div [] [ Lieblingsrezepte.view model.lieblingsrezepteModel |> Html.map LieblingsrezepteMsg ]
-        , div [] [ Einkaufslisten.view model.einkaufslistenModel |> Html.map EinkaufslistenMsg ]
-        , a [ href "/index.html" ]
+        [ a [ href "/index.html" ]
             [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] [] ]
         , div [] []
         , div [ class "header-links" ]
@@ -85,6 +83,8 @@ view model =
                     []
                 , div [class "svg.Unterschrift"] [ text "Dessert/Süßes" ]
                 ]
+            , div [] [ Lieblingsrezepte.view model.lieblingsrezepteModel |> Html.map LieblingsrezepteMsg ]
+            , div [] [ Einkaufslisten.view model.einkaufslistenModel |> Html.map EinkaufslistenMsg ]
             ]
         ]
 
