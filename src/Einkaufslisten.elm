@@ -32,6 +32,7 @@ type Msg
     | DragOver
     | DragLeave
     | Drop
+    | AddToCart String -- Neue Nachricht für das Ablegen im Einkaufswagen
 
 
 -- Msg Decoders
@@ -69,6 +70,8 @@ update msg model =
                 Nothing ->
                     ( model, Cmd.none )
 
+        AddToCart item -> -- Neue Nachricht behandeln und das Element zum Einkaufswagen hinzufügen
+            ( { model | cartItems = item :: model.cartItems }, Cmd.none )
 
 
 -- View
@@ -94,19 +97,21 @@ viewFoodItem _ item =
             [ draggable "true"
             , on "dragstart" (Json.Decode.succeed (DragStart item))
             , on "dragend" (Json.Decode.succeed DragEnd)
+            , on "dragover" (Json.Decode.succeed DragOver)
+            , on "dragenter" (Json.Decode.succeed DragEnter)
+            , on "dragleave" (Json.Decode.succeed DragLeave)
+            , on "drop" (Json.Decode.succeed (AddToCart item)) -- Neue Nachricht generieren
             ]
     in
-    div [ Html.Attributes.class "food-item", draggable "true", on "dragover" (Json.Decode.succeed DragOver), on "dragenter" (Json.Decode.succeed DragEnter), on "dragleave" (Json.Decode.succeed DragLeave), on "drop" (Json.Decode.succeed Drop) ]
+    div [ Html.Attributes.class "food-item" ]
         [ img [ src ("./SVGs/" ++ item ++ ".svg"), draggable "false" ] []
         , Html.text item
         ]
 
 
-
 viewCartItem : String -> Svg msg
 viewCartItem item =
     Html.text item
-
 
 
 -- Available Food Items
