@@ -5663,26 +5663,6 @@ var $author$project$Main$view = function (model) {
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$map,
-						$author$project$Main$LieblingsrezepteMsg,
-						$author$project$Lieblingsrezepte$view(model.lieblingsrezepteModel))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$map,
-						$author$project$Main$EinkaufslistenMsg,
-						$author$project$Einkaufslisten$view(model.einkaufslistenModel))
-					])),
-				A2(
 				$elm$html$Html$a,
 				_List_fromArray(
 					[
@@ -5827,6 +5807,26 @@ var $author$project$Main$view = function (model) {
 									[
 										$elm$html$Html$text('Dessert/Süßes')
 									]))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$map,
+								$author$project$Main$LieblingsrezepteMsg,
+								$author$project$Lieblingsrezepte$view(model.lieblingsrezepteModel))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$map,
+								$author$project$Main$EinkaufslistenMsg,
+								$author$project$Einkaufslisten$view(model.einkaufslistenModel))
 							]))
 					]))
 			]));
