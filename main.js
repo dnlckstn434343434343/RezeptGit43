@@ -5289,7 +5289,17 @@ var $author$project$Main$view = function (model) {
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Was kochst du heute? Klicke auf eine beliebige Kategorie und finde es heraus.')
+						$elm$html$Html$text('Was kochst du heute?')
+					])),
+				A2(
+				$elm$html$Html$h1,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('h1')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Klicke auf eine beliebige Kategorie und finde es heraus.')
 					])),
 				A2(
 				$elm$html$Html$div,
