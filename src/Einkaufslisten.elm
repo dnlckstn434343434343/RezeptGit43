@@ -80,8 +80,8 @@ view model =
             (List.map (viewFoodItem model) availableFoodItems)
         , Svg.svg [ Svg.Attributes.class "shopping-cart", Svg.Attributes.viewBox "0 0 100 100" ]
             [ Svg.rect [ Svg.Attributes.width "100", Svg.Attributes.height "100", Svg.Attributes.fill "#f5f5f5" ] []
-            , Svg.text_ [ Svg.Attributes.x "50", Svg.Attributes.y "50", Svg.Attributes.textAnchor "middle", Svg.Attributes.fontSize "20", Svg.Attributes.fill "#333" ] [ Html.text "Shopping Cart" ]
-            , Svg.text_ [ Svg.Attributes.x "50", Svg.Attributes.y "80", Svg.Attributes.textAnchor "middle", Svg.Attributes.fontSize "14", Svg.Attributes.fill "#666" ] [ Html.text "Drag food items here" ]
+            , Svg.text_ [ Svg.Attributes.x "50", Svg.Attributes.y "50", Svg.Attributes.textAnchor "middle", Svg.Attributes.fontSize "20", Svg.Attributes.fill "#333" ] [ Html.text "Einkaufswagen" ]
+            , Svg.text_ [ Svg.Attributes.x "50", Svg.Attributes.y "80", Svg.Attributes.textAnchor "middle", Svg.Attributes.fontSize "14", Svg.Attributes.fill "#666" ] [ Html.text "Ziehe deine Zutaten hier rein" ]
             , text_ [ x "50", y "110", textAnchor "middle", fontSize "14", fill "#666" ] (List.map viewCartItem model.cartItems)
             ]
         ]
