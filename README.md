@@ -3,12 +3,11 @@
 Projektbeschreibung: 
 
 Benutzer sollen mit dem Rezeptmanager ihre Rezepte organisieren und verwalten können. 
+- Diese werden dann nach Titel des Rezeptes, Zutaten und Kategorie (Frühstück, Mittag-/Abendessen, Dessert/Süßes) randomisiert ausgeg
+- In Lieblingsrezepte: Benutzer können ihre Rezepte hinzufügen.
+- Jedes gespeicherte Rezept enthält verschiedene Informationen, wie Zutaten, Zubereitungsschritte, Zubereitungszeit, Schwierigkeitsgrad, Kategorien usw.
+- In Einkaufslisten: Benutzer können sich Lebensmittel durch Ziehen in einen Einkaufswagen ablegen
 
-- Benutzer können ihre Rezepte hinzufügen, bearbeiten und löschen.
-- Benutzer können ihre Lieblingsrezepte in einer separaten Liste speichern
-- Jedes Rezept enthält verschiedene Informationen, wie Zutaten, Zubereitungsschritte, Zubereitungszeit, Schwierigkeitsgrad, Kategorien usw.
-- Benutzer können sich Rezepte durch Anklicken der SVGs anzeigen lassen 
-- Diese werden dann nach Titel des Rezeptes, Zutaten und Kategorie (Frühstück, Mittag-/Abendessen, Dessert/Süßes) randomisiert ausgegeben 
 
 
 #Optional:
