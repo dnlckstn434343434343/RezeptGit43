@@ -48,7 +48,8 @@ view model =
             , a [ href "/einkauflisten.html" ] [ text "Einkaufslisten" ]
             ]
         , div [] []
-        , h1 [class "h1"] [ text "Was kochst du heute? Klicke auf eine beliebige Kategorie und finde es heraus." ]
+        , h1 [class "h1"] [ text "Was kochst du heute?" ]
+        , h1 [class "h1"] [ text "Klicke auf eine beliebige Kategorie und finde es heraus." ]
         , div [class "svg-container"]
             [ div []
                 [ img
