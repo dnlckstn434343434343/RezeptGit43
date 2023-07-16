@@ -81,11 +81,9 @@ view model =
     div []
         [ div [ Html.Attributes.class "food-items" ]
             (List.map (viewFoodItem model) availableFoodItems)
-        , Svg.svg [ Svg.Attributes.class "shopping-cart", Svg.Attributes.viewBox "0 0 100 100" ]
-            [ Svg.rect [ Svg.Attributes.width "100", Svg.Attributes.height "100", Svg.Attributes.fill "#f5f5f5" ] []
-            , Svg.text_ [ Svg.Attributes.x "50", Svg.Attributes.y "50", Svg.Attributes.textAnchor "middle", Svg.Attributes.fontSize "20", Svg.Attributes.fill "#333" ] [ Html.text "Einkaufswagen" ]
-            , Svg.text_ [ Svg.Attributes.x "50", Svg.Attributes.y "80", Svg.Attributes.textAnchor "middle", Svg.Attributes.fontSize "14", Svg.Attributes.fill "#666" ] [ Html.text "Ziehe deine Zutaten hier rein" ]
-            , text_ [ x "50", y "110", textAnchor "middle", fontSize "14", fill "#666" ] (List.map viewCartItem model.cartItems)
+        , svg [ Svg.Attributes.class "shopping-cart", Svg.Attributes.viewBox "0 0 100 100" ]
+            [ image [ Svg.Attributes.xlinkHref "./SVGs/einkaufswagen.svg", Svg.Attributes.width "100", Svg.Attributes.height "100" ] []
+            , text_ [ x "50", y "150", textAnchor "middle", fontSize "14", fill "#666" ] (List.map (viewCartItem model) model.cartItems)
             ]
         ]
 
@@ -109,9 +107,9 @@ viewFoodItem _ item =
         ]
 
 
-viewCartItem : String -> Svg msg
-viewCartItem item =
-    Html.text item
+viewCartItem : Model -> String -> Svg msg
+viewCartItem model item =
+    text_ [ x "50", y (String.fromInt (120 + (20 * List.length model.cartItems))), textAnchor "middle", fontSize "14", fill "#666" ] [ Html.text item ]
 
 
 -- Available Food Items
