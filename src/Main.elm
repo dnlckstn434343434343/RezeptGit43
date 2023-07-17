@@ -12,6 +12,9 @@ import Url.Parser exposing ((</>))
 import Html exposing (ul)
 import Html.Attributes exposing (class)
 import Html exposing (text)
+import Html exposing (img)
+import Html.Attributes exposing (src)
+import Html.Attributes exposing (alt)
 
 
 
@@ -129,7 +132,8 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "Deine RezeptApp"
     , body = 
-        [ Html.ul [class "ul"]
+    [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
+        , Html.ul [class "ul"]
             [ internalLinkView "/Startseite"
             , internalLinkView "/Lieblingsrezepte"
             , internalLinkView "/Einkaufslisten"
