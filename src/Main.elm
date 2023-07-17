@@ -13,6 +13,7 @@ import Url.Builder
 import Url.Parser exposing ((</>))
 import Html exposing (ul)
 import Html.Attributes exposing (class)
+import Html exposing (text)
 
 
 
@@ -152,6 +153,7 @@ view model =
 
             NotFound ->
                 notFoundView
+        , text "test" 
         ]
     }
 
