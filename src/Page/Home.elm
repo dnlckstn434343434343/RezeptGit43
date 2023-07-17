@@ -5,4 +5,4 @@ import Html
 
 view : Html.Html msg
 view =
-    Html.text "Home view"
+    Html.text "Home View"
