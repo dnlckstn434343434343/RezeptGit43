@@ -1,97 +1,197 @@
-module Main exposing (..)
+module Main exposing (main)
 
+import Base
 import Browser
-import Html exposing (Html, div, text, h1, h2, a, img)
-import Html.Attributes exposing (class, href, src, alt)
-import Html.Events exposing (onClick)
+import Browser.Navigation
+import Html
+import Html.Attributes
+import About
+import Lieblingsrezepte
+import Einkaufslisten
+import Blog2
+import Startseite
+import Url
+import Url.Builder
+import Url.Parser exposing ((</>))
 
--- Main program
+
+
+-- MAIN
+
 
 main : Program () Model Msg
 main =
-    Browser.sandbox
+    Browser.application
         { init = init
-        , update = update
         , view = view
+        , update = update
+        , subscriptions = subscriptions
+        , onUrlChange = UrlChanged
+        , onUrlRequest = LinkClicked
         }
 
--- Model
+
+
+-- MODEL
+
+
+type Page
+    = Home
+    | About
+    | Blog Int
+    | NotFound
 
 
 type alias Model =
-    {}
+    { key : Browser.Navigation.Key
+    , url : Url.Url
+    , page : Page
+    }
 
 
-init : Model
-init =
-    {}
+init : () -> Url.Url -> Browser.Navigation.Key -> ( Model, Cmd Msg )
+init flags url key =
+    ( { key = key
+      , url = url
+      , page = toPage url
+      }
+    , Cmd.none
+    )
 
 
--- Messages
+
+-- UPDATE
 
 
 type Msg
-    = NoOp
-
--- View
-
-
-view : Model -> Html Msg
-view model =
-    div [class "container"]
-        [ a [ href "/index.html" ]
-            [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] [] ]
-        , div [] []
-        , div [class "header-links"]
-            [ a [ href "/index.html" ] [ text "Startseite" ]
-            , a [ href "/lieblingsrezepte.html" ] [ text "Lieblingsrezepte" ]
-            , a [ href "/einkauflisten.html" ] [ text "Einkaufslisten" ]
-            ]
-        , div [] []
-        , h1 [class "h1"] [ text "Was kochst du heute?" ]
-        , h1 [class "h1"] [ text "Klicke auf eine beliebige Kategorie und finde es heraus." ]
-        , div [class "svg-container"]
-            [ div []
-                [ img
-                    [ class "svg"
-                    , src "./SVGs/breakfast.svg"
-                    ]
-                    []
-                , div [class "svg Unterschrift"] [ text "Frühstück" ]
-                ]
-            , div []
-                [ img
-                    [ class "svg"
-                    , src "./SVGs/lunch.svg"
-                    ]
-                    []
-                , div [class "svg Unterschrift"] [ text "Mittag-/Abendessen" ]
-                ]
-            , div []
-                [ img
-                    [ class "svg"
-                    , src "./SVGs/dessert.svg"
-                    ]
-                    []
-                , div [class "svg Unterschrift"] [ text "Dessert/Süßes" ]
-                ]
-            ]
-        ]
-
--- Update
+    = LinkClicked Browser.UrlRequest
+    | UrlChanged Url.Url
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NoOp ->
-            model
+        LinkClicked urlRequest ->
+            case urlRequest of
+                Browser.Internal url ->
+                    ( model
+                    , Browser.Navigation.pushUrl model.key (Url.toString url)
+                    )
+
+                Browser.External href ->
+                    ( model
+                    , Browser.Navigation.load href
+                    )
+
+        UrlChanged url ->
+            ( { model | url = url, page = toPage url }
+            , Cmd.none
+            )
 
 
 
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    Sub.none
 
 
 
+-- ROUTE
+
+
+route : Url.Parser.Parser (Page -> a) a
+route =
+    Url.Parser.oneOf
+        [ Url.Parser.map Home Url.Parser.top
+        , Url.Parser.map Home (Url.Parser.s Base.base)
+        , Url.Parser.map About (Url.Parser.s Base.base </> Url.Parser.s "about")
+        , Url.Parser.map Blog (Url.Parser.s Base.base </> Url.Parser.s "blog" </> Url.Parser.int)
+        ]
+
+
+toPage : Url.Url -> Page
+toPage url =
+    case Url.Parser.parse route url of
+        Just answer ->
+            answer
+
+        Nothing ->
+            NotFound
 
 
 
+-- VIEW
+
+
+view : Model -> Browser.Document Msg
+view model =
+    { title = "Deine Rezeptapp"
+    , body =
+        [ Html.text "URL: "
+        , Html.b [] [ Html.text (Url.toString model.url) ]
+        , Html.ul []
+            [ internalLinkView "Startseite"
+            , internalLinkView "Lieblingsrezepte"
+            , internalLinkView "Einkaufslisten"
+            , internalLinkView "Impressum"
+            ]
+        , Html.ul [] [ externalLinkView "https://github.com/dnlckstn434343434343/RezeptGit43" ]
+        , Html.hr [] []
+        , case model.page of
+            Home ->
+                Startseite.view
+
+            About ->
+                About.view
+
+            Blog number ->
+                blogView number
+
+            NotFound ->
+                notFoundView
+        ]
+    }
+
+
+internalLinkView : String -> Html.Html msg
+internalLinkView path =
+    Html.li []
+        [ Html.a
+            [ Html.Attributes.href <|
+                Url.Builder.absolute [ Base.base, String.dropLeft 1 path ] []
+            ]
+            [ Html.text path ]
+        ]
+
+
+externalLinkView : String -> Html.Html msg
+externalLinkView href =
+    Html.li []
+        [ Html.a
+            [ Html.Attributes.href href ]
+            [ Html.text href ]
+        ]
+
+
+blogView : Int -> Html.Html msg
+blogView number =
+    case number of
+        0 ->
+            Startseite.view
+
+        1 ->
+            Lieblingsrezepte.view
+
+        2 ->
+            Einkaufslisten.view
+            
+        _ ->
+            notFoundView
+
+
+notFoundView : Html.Html msg
+notFoundView =
+    Html.text "Fehler//Not found"
