@@ -6157,7 +6157,8 @@ var $author$project$Main$view = function (model) {
 					default:
 						return $author$project$Main$notFoundView;
 				}
-			}()
+			}(),
+				$elm$html$Html$text('test')
 			]),
 		title: 'Deine RezeptApp'
 	};
