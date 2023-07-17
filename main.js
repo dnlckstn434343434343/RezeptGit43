@@ -6115,7 +6115,7 @@ var $author$project$Main$internalLinkView = function (path) {
 };
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Page$About$view = $elm$html$Html$text('About view');
-var $author$project$Page$Home$view = $elm$html$Html$text('Home view');
+var $author$project$Page$Home$view = $elm$html$Html$text('Home View');
 var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
