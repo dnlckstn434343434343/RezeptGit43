@@ -5759,49 +5759,13 @@ var $elm$url$Url$Parser$parse = F2(
 					url.fragment,
 					$elm$core$Basics$identity)));
 	});
-var $author$project$Main$About = {$: 'About'};
-var $author$project$Main$Blog = function (a) {
-	return {$: 'Blog', a: a};
-};
-var $author$project$Main$Home = {$: 'Home'};
+var $author$project$Main$Einkaufslisten = {$: 'Einkaufslisten'};
+var $author$project$Main$Lieblingsrezepte = {$: 'Lieblingsrezepte'};
+var $author$project$Main$Startseite = {$: 'Startseite'};
 var $author$project$Base$base = 'elm-github-pages';
 var $elm$url$Url$Parser$Parser = function (a) {
 	return {$: 'Parser', a: a};
 };
-var $elm$url$Url$Parser$custom = F2(
-	function (tipe, stringToSomething) {
-		return $elm$url$Url$Parser$Parser(
-			function (_v0) {
-				var visited = _v0.visited;
-				var unvisited = _v0.unvisited;
-				var params = _v0.params;
-				var frag = _v0.frag;
-				var value = _v0.value;
-				if (!unvisited.b) {
-					return _List_Nil;
-				} else {
-					var next = unvisited.a;
-					var rest = unvisited.b;
-					var _v2 = stringToSomething(next);
-					if (_v2.$ === 'Just') {
-						var nextValue = _v2.a;
-						return _List_fromArray(
-							[
-								A5(
-								$elm$url$Url$Parser$State,
-								A2($elm$core$List$cons, next, visited),
-								rest,
-								params,
-								frag,
-								value(nextValue))
-							]);
-					} else {
-						return _List_Nil;
-					}
-				}
-			});
-	});
-var $elm$url$Url$Parser$int = A2($elm$url$Url$Parser$custom, 'NUMBER', $elm$core$String$toInt);
 var $elm$url$Url$Parser$mapState = F2(
 	function (func, _v0) {
 		var visited = _v0.visited;
@@ -5908,28 +5872,25 @@ var $elm$url$Url$Parser$top = $elm$url$Url$Parser$Parser(
 var $author$project$Main$route = $elm$url$Url$Parser$oneOf(
 	_List_fromArray(
 		[
-			A2($elm$url$Url$Parser$map, $author$project$Main$Home, $elm$url$Url$Parser$top),
+			A2($elm$url$Url$Parser$map, $author$project$Main$Startseite, $elm$url$Url$Parser$top),
 			A2(
 			$elm$url$Url$Parser$map,
-			$author$project$Main$Home,
+			$author$project$Main$Startseite,
 			$elm$url$Url$Parser$s($author$project$Base$base)),
 			A2(
 			$elm$url$Url$Parser$map,
-			$author$project$Main$About,
+			$author$project$Main$Lieblingsrezepte,
 			A2(
 				$elm$url$Url$Parser$slash,
 				$elm$url$Url$Parser$s($author$project$Base$base),
-				$elm$url$Url$Parser$s('about'))),
+				$elm$url$Url$Parser$s('Lieblingsrezepte'))),
 			A2(
 			$elm$url$Url$Parser$map,
-			$author$project$Main$Blog,
+			$author$project$Main$Einkaufslisten,
 			A2(
 				$elm$url$Url$Parser$slash,
 				$elm$url$Url$Parser$s($author$project$Base$base),
-				A2(
-					$elm$url$Url$Parser$slash,
-					$elm$url$Url$Parser$s('blog'),
-					$elm$url$Url$Parser$int)))
+				$elm$url$Url$Parser$s('Einkaufslisten')))
 		]));
 var $author$project$Main$toPage = function (url) {
 	var _v0 = A2($elm$url$Url$Parser$parse, $author$project$Main$route, url);
@@ -6032,24 +5993,6 @@ var $author$project$Main$update = F2(
 		}
 	});
 var $elm$html$Html$b = _VirtualDom_node('b');
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Main$notFoundView = $elm$html$Html$text('Not found');
-var $author$project$Page$Blog0$view = $elm$html$Html$text('Blog 0 view');
-var $author$project$Page$Blog1$view = $elm$html$Html$text('Blog 1 view');
-var $author$project$Page$Blog2$view = $elm$html$Html$text('Blog 2 view');
-var $author$project$Main$blogView = function (number) {
-	switch (number) {
-		case 0:
-			return $author$project$Page$Blog0$view;
-		case 1:
-			return $author$project$Page$Blog1$view;
-		case 2:
-			return $author$project$Page$Blog2$view;
-		default:
-			return $author$project$Main$notFoundView;
-	}
-};
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6087,6 +6030,8 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$li = _VirtualDom_node('li');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$internalLinkView = function (path) {
 	return A2(
 		$elm$html$Html$li,
@@ -6113,9 +6058,11 @@ var $author$project$Main$internalLinkView = function (path) {
 					]))
 			]));
 };
+var $author$project$Main$notFoundView = $elm$html$Html$text('Not found');
 var $elm$html$Html$ul = _VirtualDom_node('ul');
-var $author$project$Page$About$view = $elm$html$Html$text('About view');
-var $author$project$Page$Home$view = $elm$html$Html$text('Home View');
+var $author$project$Page$Einkaufslisten$view = $elm$html$Html$text('Einkaufslisten');
+var $author$project$Page$Lieblingsrezepte$view = $elm$html$Html$text('About view');
+var $author$project$Page$Startseite$view = $elm$html$Html$text('Startseite');
 var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
@@ -6137,9 +6084,9 @@ var $author$project$Main$view = function (model) {
 					]),
 				_List_fromArray(
 					[
-						$author$project$Main$internalLinkView('/'),
-						$author$project$Main$internalLinkView('/about'),
-						$author$project$Main$internalLinkView('/blog/0'),
+						$author$project$Main$internalLinkView('/Startseite'),
+						$author$project$Main$internalLinkView('/Lieblingsrezepte'),
+						$author$project$Main$internalLinkView('/Einkaufslisten'),
 						$author$project$Main$internalLinkView('/blog/1'),
 						$author$project$Main$internalLinkView('/blog/2')
 					])),
@@ -6147,13 +6094,12 @@ var $author$project$Main$view = function (model) {
 				function () {
 				var _v0 = model.page;
 				switch (_v0.$) {
-					case 'Home':
-						return $author$project$Page$Home$view;
-					case 'About':
-						return $author$project$Page$About$view;
-					case 'Blog':
-						var number = _v0.a;
-						return $author$project$Main$blogView(number);
+					case 'Startseite':
+						return $author$project$Page$Startseite$view;
+					case 'Lieblingsrezepte':
+						return $author$project$Page$Lieblingsrezepte$view;
+					case 'Einkaufslisten':
+						return $author$project$Page$Einkaufslisten$view;
 					default:
 						return $author$project$Main$notFoundView;
 				}

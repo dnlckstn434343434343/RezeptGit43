@@ -3,11 +3,9 @@ module Main exposing (main)
 import Base
 import Browser
 import Browser.Navigation
-import Page.About
-import Page.Blog0
-import Page.Blog1
-import Page.Blog2
-import Page.Home
+import Page.Lieblingsrezepte exposing (..)
+import Page.Einkaufslisten exposing (..)
+import Page.Startseite exposing (..)
 import Url
 import Url.Builder
 import Url.Parser exposing ((</>))
@@ -37,9 +35,9 @@ main =
 
 
 type Page
-    = Home
-    | About
-    | Blog Int
+    = Startseite
+    | Lieblingsrezepte
+    | Einkaufslisten
     | NotFound
 
 
@@ -106,10 +104,10 @@ subscriptions _ =
 route : Url.Parser.Parser (Page -> a) a
 route =
     Url.Parser.oneOf
-        [ Url.Parser.map Home Url.Parser.top
-        , Url.Parser.map Home (Url.Parser.s Base.base)
-        , Url.Parser.map About (Url.Parser.s Base.base </> Url.Parser.s "about")
-        , Url.Parser.map Blog (Url.Parser.s Base.base </> Url.Parser.s "blog" </> Url.Parser.int)
+        [ Url.Parser.map Startseite Url.Parser.top
+        , Url.Parser.map Startseite (Url.Parser.s Base.base)
+        , Url.Parser.map Lieblingsrezepte (Url.Parser.s Base.base </> Url.Parser.s "Lieblingsrezepte")
+        , Url.Parser.map Einkaufslisten (Url.Parser.s Base.base </> Url.Parser.s "Einkaufslisten")
         ]
 
 
@@ -134,22 +132,22 @@ view model =
         [ Html.text "URL: "
         , Html.b [] [ Html.text (Url.toString model.url) ]
         , Html.ul [class "ul"]
-            [ internalLinkView "/"
-            , internalLinkView "/about"
-            , internalLinkView "/blog/0"
+            [ internalLinkView "/Startseite"
+            , internalLinkView "/Lieblingsrezepte"
+            , internalLinkView "/Einkaufslisten"
             , internalLinkView "/blog/1"
             , internalLinkView "/blog/2"
             ]
         , Html.hr [] []
         , case model.page of
-            Home ->
-                Page.Home.view
+            Startseite ->
+                Page.Startseite.view
 
-            About ->
-                Page.About.view
+            Lieblingsrezepte ->
+                Page.Lieblingsrezepte.view
 
-            Blog number ->
-                blogView number
+            Einkaufslisten ->
+                Page.Einkaufslisten.view
 
             NotFound ->
                 notFoundView
@@ -182,13 +180,7 @@ blogView : Int -> Html.Html msg
 blogView number =
     case number of
         0 ->
-            Page.Blog0.view
-
-        1 ->
-            Page.Blog1.view
-
-        2 ->
-            Page.Blog2.view
+            Page.Einkaufslisten.view
 
         _ ->
             notFoundView
