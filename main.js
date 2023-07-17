@@ -6000,8 +6000,10 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			$elm$json$Json$Encode$string(string));
 	});
+var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$hr = _VirtualDom_node('hr');
+var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$url$Url$Builder$toQueryPair = function (_v0) {
 	var key = _v0.a;
@@ -6058,6 +6060,12 @@ var $author$project$Main$internalLinkView = function (path) {
 			]));
 };
 var $author$project$Main$notFoundView = $elm$html$Html$text('Not found');
+var $elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Page$Einkaufslisten$view = $elm$html$Html$text('Einkaufslisten');
 var $author$project$Page$Lieblingsrezepte$view = $elm$html$Html$text('Lieblingsrezepte');
@@ -6066,6 +6074,15 @@ var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
 			[
+				A2(
+				$elm$html$Html$img,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('img'),
+						$elm$html$Html$Attributes$src('./Bilder/Logo.jpg'),
+						$elm$html$Html$Attributes$alt('Logo')
+					]),
+				_List_Nil),
 				A2(
 				$elm$html$Html$ul,
 				_List_fromArray(
