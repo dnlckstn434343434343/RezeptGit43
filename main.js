@@ -6050,7 +6050,6 @@ var $author$project$Main$blogView = function (number) {
 			return $author$project$Main$notFoundView;
 	}
 };
-var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6059,32 +6058,9 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			$elm$json$Json$Encode$string(string));
 	});
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
-var $elm$html$Html$li = _VirtualDom_node('li');
-var $author$project$Main$externalLinkView = function (href) {
-	return A2(
-		$elm$html$Html$li,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$a,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$href(href)
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text(href)
-					]))
-			]));
-};
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$hr = _VirtualDom_node('hr');
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$url$Url$Builder$toQueryPair = function (_v0) {
 	var key = _v0.a;
 	var value = _v0.b;
@@ -6104,6 +6080,13 @@ var $elm$url$Url$Builder$absolute = F2(
 	function (pathSegments, parameters) {
 		return '/' + (A2($elm$core$String$join, '/', pathSegments) + $elm$url$Url$Builder$toQuery(parameters));
 	});
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var $elm$html$Html$li = _VirtualDom_node('li');
 var $author$project$Main$internalLinkView = function (path) {
 	return A2(
 		$elm$html$Html$li,
@@ -6137,7 +6120,7 @@ var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
 			[
-				$elm$html$Html$text('The current URL is: '),
+				$elm$html$Html$text('URL: '),
 				A2(
 				$elm$html$Html$b,
 				_List_Nil,
@@ -6148,7 +6131,10 @@ var $author$project$Main$view = function (model) {
 					])),
 				A2(
 				$elm$html$Html$ul,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('ul')
+					]),
 				_List_fromArray(
 					[
 						$author$project$Main$internalLinkView('/'),
@@ -6156,13 +6142,6 @@ var $author$project$Main$view = function (model) {
 						$author$project$Main$internalLinkView('/blog/0'),
 						$author$project$Main$internalLinkView('/blog/1'),
 						$author$project$Main$internalLinkView('/blog/2')
-					])),
-				A2(
-				$elm$html$Html$ul,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$author$project$Main$externalLinkView('https://github.com/annaghi/elm-github-pages')
 					])),
 				A2($elm$html$Html$hr, _List_Nil, _List_Nil),
 				function () {
@@ -6180,7 +6159,7 @@ var $author$project$Main$view = function (model) {
 				}
 			}()
 			]),
-		title: 'annaghi | elm-github-pages'
+		title: 'Deine RezeptApp'
 	};
 };
 var $author$project$Main$main = $elm$browser$Browser$application(
