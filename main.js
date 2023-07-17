@@ -5879,6 +5879,13 @@ var $author$project$Main$route = $elm$url$Url$Parser$oneOf(
 			$elm$url$Url$Parser$s($author$project$Base$base)),
 			A2(
 			$elm$url$Url$Parser$map,
+			$author$project$Main$Startseite,
+			A2(
+				$elm$url$Url$Parser$slash,
+				$elm$url$Url$Parser$s($author$project$Base$base),
+				$elm$url$Url$Parser$s('Startseite'))),
+			A2(
+			$elm$url$Url$Parser$map,
 			$author$project$Main$Lieblingsrezepte,
 			A2(
 				$elm$url$Url$Parser$slash,
@@ -6091,9 +6098,9 @@ var $author$project$Main$view = function (model) {
 					]),
 				_List_fromArray(
 					[
-						$author$project$Main$internalLinkView('/Startseite'),
-						$author$project$Main$internalLinkView('/Lieblingsrezepte'),
-						$author$project$Main$internalLinkView('/Einkaufslisten')
+						$author$project$Main$internalLinkView('Startseite'),
+						$author$project$Main$internalLinkView('Lieblingsrezepte'),
+						$author$project$Main$internalLinkView('Einkaufslisten')
 					])),
 				A2($elm$html$Html$hr, _List_Nil, _List_Nil),
 				function () {
@@ -6108,8 +6115,7 @@ var $author$project$Main$view = function (model) {
 					default:
 						return $author$project$Main$notFoundView;
 				}
-			}(),
-				$elm$html$Html$text('test')
+			}()
 			]),
 		title: 'Deine RezeptApp'
 	};
