@@ -9,13 +9,8 @@ import Page.Startseite exposing (..)
 import Url
 import Url.Builder
 import Url.Parser exposing ((</>))
-import Html exposing (ul)
-import Html.Attributes exposing (class)
-import Html exposing (text)
-import Html exposing (img)
-import Html.Attributes exposing (src)
-import Html.Attributes exposing (alt)
-
+import Html exposing (img, text, ul)
+import Html.Attributes exposing (src, alt, class)
 
 
 -- MAIN
@@ -109,6 +104,7 @@ route =
     Url.Parser.oneOf
         [ Url.Parser.map Startseite Url.Parser.top
         , Url.Parser.map Startseite (Url.Parser.s Base.base)
+        , Url.Parser.map Startseite (Url.Parser.s Base.base </> Url.Parser.s "Startseite")
         , Url.Parser.map Lieblingsrezepte (Url.Parser.s Base.base </> Url.Parser.s "Lieblingsrezepte")
         , Url.Parser.map Einkaufslisten (Url.Parser.s Base.base </> Url.Parser.s "Einkaufslisten")
         ]
@@ -134,9 +130,9 @@ view model =
     , body = 
     [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
         , Html.ul [class "ul"]
-            [ internalLinkView "/Startseite"
-            , internalLinkView "/Lieblingsrezepte"
-            , internalLinkView "/Einkaufslisten"
+            [ internalLinkView "Startseite"
+            , internalLinkView "Lieblingsrezepte"
+            , internalLinkView "Einkaufslisten"
             ]
         , Html.hr [] []
         , case model.page of
@@ -150,8 +146,7 @@ view model =
                 Page.Einkaufslisten.view
 
             NotFound ->
-                notFoundView
-        , text "test" 
+                notFoundView 
         ]
     }
 
@@ -165,26 +160,6 @@ internalLinkView path =
             ]
             [ Html.text path ]
         ]
-
-
-externalLinkView : String -> Html.Html msg
-externalLinkView href =
-    Html.li []
-        [ Html.a
-            [ Html.Attributes.href href ]
-            [ Html.text href ]
-        ]
-
-
-blogView : Int -> Html.Html msg
-blogView number =
-    case number of
-        0 ->
-            Page.Einkaufslisten.view
-
-        _ ->
-            notFoundView
-
 
 notFoundView : Html.Html msg
 notFoundView =
