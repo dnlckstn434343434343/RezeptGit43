@@ -3,8 +3,6 @@ module Main exposing (main)
 import Base
 import Browser
 import Browser.Navigation
-import Html
-import Html.Attributes
 import Page.About
 import Page.Blog0
 import Page.Blog1
