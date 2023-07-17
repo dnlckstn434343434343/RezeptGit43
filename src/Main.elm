@@ -3,8 +3,8 @@ module Main exposing (main)
 import Base
 import Browser
 import Browser.Navigation
-import Html
-import Html.Attributes
+import Html exposing (div, text, h1, h2, a, img)
+import Html.Attributes exposing (class, href, src, alt)
 import About
 import Lieblingsrezepte
 import Einkaufslisten
@@ -132,13 +132,13 @@ view model =
     , body =
         [ Html.text "URL: "
         , Html.b [] [ Html.text (Url.toString model.url) ]
+        , img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
         , Html.ul []
             [ internalLinkView "Startseite"
             , internalLinkView "Lieblingsrezepte"
             , internalLinkView "Einkaufslisten"
             , internalLinkView "Impressum"
             ]
-        , Html.ul [] [ externalLinkView "https://github.com/dnlckstn434343434343/RezeptGit43" ]
         , Html.hr [] []
         , case model.page of
             Home ->
@@ -152,8 +152,21 @@ view model =
 
             NotFound ->
                 notFoundView
+        , h1 [class "h1"] [ text "Was kochst du heute?" ]
+        , h1 [class "h1"] [ text "Klicke auf das Bild und finde es heraus." ]
+        , div [class "svg-container"]
+            [ div []
+                [ img
+                    [ class "svg"
+                    , src "./SVGs/breakfast.svg"
+                    ]
+                    []
+                , div [class "svg Unterschrift"] [ text "Frühstück" ]
+                ]
+            ]
         ]
     }
+
 
 
 internalLinkView : String -> Html.Html msg
