@@ -13,6 +13,8 @@ import Page.Home
 import Url
 import Url.Builder
 import Url.Parser exposing ((</>))
+import Html exposing (ul)
+import Html.Attributes exposing (class)
 
 
 
@@ -128,18 +130,17 @@ toPage url =
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "annaghi | elm-github-pages"
+    { title = "Deine RezeptApp"
     , body =
-        [ Html.text "The current URL is: "
+        [ Html.text "URL: "
         , Html.b [] [ Html.text (Url.toString model.url) ]
-        , Html.ul []
+        , Html.ul [class "ul"]
             [ internalLinkView "/"
             , internalLinkView "/about"
             , internalLinkView "/blog/0"
             , internalLinkView "/blog/1"
             , internalLinkView "/blog/2"
             ]
-        , Html.ul [] [ externalLinkView "https://github.com/annaghi/elm-github-pages" ]
         , Html.hr [] []
         , case model.page of
             Home ->
