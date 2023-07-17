@@ -128,15 +128,11 @@ toPage url =
 view : Model -> Browser.Document Msg
 view model =
     { title = "Deine RezeptApp"
-    , body =
-        [ Html.text "URL: "
-        , Html.b [] [ Html.text (Url.toString model.url) ]
-        , Html.ul [class "ul"]
+    , body = 
+        [ Html.ul [class "ul"]
             [ internalLinkView "/Startseite"
             , internalLinkView "/Lieblingsrezepte"
             , internalLinkView "/Einkaufslisten"
-            , internalLinkView "/blog/1"
-            , internalLinkView "/blog/2"
             ]
         , Html.hr [] []
         , case model.page of

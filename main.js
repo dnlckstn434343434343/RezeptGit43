@@ -5992,7 +5992,6 @@ var $author$project$Main$update = F2(
 				$elm$core$Platform$Cmd$none);
 		}
 	});
-var $elm$html$Html$b = _VirtualDom_node('b');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6061,21 +6060,12 @@ var $author$project$Main$internalLinkView = function (path) {
 var $author$project$Main$notFoundView = $elm$html$Html$text('Not found');
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Page$Einkaufslisten$view = $elm$html$Html$text('Einkaufslisten');
-var $author$project$Page$Lieblingsrezepte$view = $elm$html$Html$text('About view');
+var $author$project$Page$Lieblingsrezepte$view = $elm$html$Html$text('Lieblingsrezepte');
 var $author$project$Page$Startseite$view = $elm$html$Html$text('Startseite');
 var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
 			[
-				$elm$html$Html$text('URL: '),
-				A2(
-				$elm$html$Html$b,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(
-						$elm$url$Url$toString(model.url))
-					])),
 				A2(
 				$elm$html$Html$ul,
 				_List_fromArray(
@@ -6086,9 +6076,7 @@ var $author$project$Main$view = function (model) {
 					[
 						$author$project$Main$internalLinkView('/Startseite'),
 						$author$project$Main$internalLinkView('/Lieblingsrezepte'),
-						$author$project$Main$internalLinkView('/Einkaufslisten'),
-						$author$project$Main$internalLinkView('/blog/1'),
-						$author$project$Main$internalLinkView('/blog/2')
+						$author$project$Main$internalLinkView('/Einkaufslisten')
 					])),
 				A2($elm$html$Html$hr, _List_Nil, _List_Nil),
 				function () {
