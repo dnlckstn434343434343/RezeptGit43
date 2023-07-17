@@ -5764,7 +5764,7 @@ var $author$project$Main$Blog = function (a) {
 	return {$: 'Blog', a: a};
 };
 var $author$project$Main$Home = {$: 'Home'};
-var $author$project$Base$base = 'elm-github-pages';
+var $author$project$Base$base = 'Basis';
 var $elm$url$Url$Parser$Parser = function (a) {
 	return {$: 'Parser', a: a};
 };
@@ -6035,8 +6035,8 @@ var $elm$html$Html$b = _VirtualDom_node('b');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$notFoundView = $elm$html$Html$text('Fehler//Not found');
-var $author$project$Einkaufslisten$view = $elm$html$Html$text('Blog 1 view');
-var $author$project$Lieblingsrezepte$view = $elm$html$Html$text('Blog 0 view');
+var $author$project$Einkaufslisten$view = $elm$html$Html$text('Einkaufslisten');
+var $author$project$Lieblingsrezepte$view = $elm$html$Html$text('Lieblingsrezepte');
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
@@ -6310,7 +6310,7 @@ var $author$project$Main$internalLinkView = function (path) {
 			]));
 };
 var $elm$html$Html$ul = _VirtualDom_node('ul');
-var $author$project$About$view = $elm$html$Html$text('About view');
+var $author$project$About$view = $elm$html$Html$text('Über');
 var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
