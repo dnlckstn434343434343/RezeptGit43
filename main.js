@@ -5864,19 +5864,16 @@ var $elm$url$Url$Parser$slash = F2(
 					parseBefore(state));
 			});
 	});
-var $elm$url$Url$Parser$top = $elm$url$Url$Parser$Parser(
-	function (state) {
-		return _List_fromArray(
-			[state]);
-	});
 var $author$project$Main$route = $elm$url$Url$Parser$oneOf(
 	_List_fromArray(
 		[
-			A2($elm$url$Url$Parser$map, $author$project$Main$Startseite, $elm$url$Url$Parser$top),
 			A2(
 			$elm$url$Url$Parser$map,
 			$author$project$Main$Startseite,
-			$elm$url$Url$Parser$s($author$project$Base$base)),
+			A2(
+				$elm$url$Url$Parser$slash,
+				$elm$url$Url$Parser$s($author$project$Base$base),
+				$elm$url$Url$Parser$s('Startseite'))),
 			A2(
 			$elm$url$Url$Parser$map,
 			$author$project$Main$Lieblingsrezepte,
@@ -6033,32 +6030,33 @@ var $elm$html$Html$Attributes$href = function (url) {
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Main$internalLinkView = function (path) {
-	return A2(
-		$elm$html$Html$li,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$a,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$href(
-						A2(
-							$elm$url$Url$Builder$absolute,
-							_List_fromArray(
-								[
-									$author$project$Base$base,
-									A2($elm$core$String$dropLeft, 1, path)
-								]),
-							_List_Nil))
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text(path)
-					]))
-			]));
-};
+var $author$project$Main$internalLinkView = F2(
+	function (path, label) {
+		return A2(
+			$elm$html$Html$li,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$a,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$href(
+							A2(
+								$elm$url$Url$Builder$absolute,
+								_List_fromArray(
+									[
+										$author$project$Base$base,
+										A2($elm$core$String$dropLeft, 1, path)
+									]),
+								_List_Nil))
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(label)
+						]))
+				]));
+	});
 var $author$project$Main$notFoundView = $elm$html$Html$text('Not found');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
@@ -6091,9 +6089,9 @@ var $author$project$Main$view = function (model) {
 					]),
 				_List_fromArray(
 					[
-						$author$project$Main$internalLinkView('/Startseite'),
-						$author$project$Main$internalLinkView('/Lieblingsrezepte'),
-						$author$project$Main$internalLinkView('/Einkaufslisten')
+						A2($author$project$Main$internalLinkView, '/Startseite', 'Startseite'),
+						A2($author$project$Main$internalLinkView, '/Lieblingsrezepte', 'Lieblingsrezepte'),
+						A2($author$project$Main$internalLinkView, '/Einkaufslisten', 'Einkaufslisten')
 					])),
 				A2($elm$html$Html$hr, _List_Nil, _List_Nil),
 				function () {
