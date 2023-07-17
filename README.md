@@ -1,15 +1,26 @@
-# Elm_RezeptApp
+# Elm GitHub Pages
 
-Projektbeschreibung: 
+A port of [rafrex/spa-github-pages](https://github.com/rafrex/spa-github-pages) for Elm.
 
-Benutzer sollen mit dem Rezeptmanager ihre Rezepte organisieren und verwalten können. 
-- Diese werden dann nach Titel des Rezeptes, Zutaten und Kategorie (Frühstück, Mittag-/Abendessen, Dessert/Süßes) randomisiert ausgeg
-- In Lieblingsrezepte: Benutzer können ihre Rezepte hinzufügen.
-- Jedes gespeicherte Rezept enthält verschiedene Informationen, wie Zutaten, Zubereitungsschritte, Zubereitungszeit, Schwierigkeitsgrad, Kategorien usw.
-- In Einkaufslisten: Benutzer können sich Lebensmittel durch Ziehen in einen Einkaufswagen ablegen
+Deploy Elm web apps with GitHub Project Pages.
+The source files are published from the `docs` folder located on the `master` branch.
 
+#### Demo
 
+Follow [annaghi.github.io/elm-github-pages](https://annaghi.github.io/elm-github-pages) and make some page reloads on the internal links.
 
-#Optional:
-- User LogIN
-- Es könnte auch eine Funktion geben, um Rezepte mit anderen Benutzern zu teilen oder Rezepte von anderen Benutzern zu entdecken.
+#### Development
+
+```bash
+npm run watch
+```
+
+#### Build
+
+```bash
+npm run build
+```
+
+#### Caveat
+
+You need to maintain two versions of the `index.html` file - one for local development and one for GitHub.

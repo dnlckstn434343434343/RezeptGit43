@@ -5764,7 +5764,7 @@ var $author$project$Main$Blog = function (a) {
 	return {$: 'Blog', a: a};
 };
 var $author$project$Main$Home = {$: 'Home'};
-var $author$project$Base$base = 'Basis';
+var $author$project$Base$base = 'elm-github-pages';
 var $elm$url$Url$Parser$Parser = function (a) {
 	return {$: 'Parser', a: a};
 };
@@ -6031,6 +6031,26 @@ var $author$project$Main$update = F2(
 				$elm$core$Platform$Cmd$none);
 		}
 	});
+var $elm$html$Html$b = _VirtualDom_node('b');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$Main$notFoundView = $elm$html$Html$text('Not found');
+var $author$project$Page$Blog0$view = $elm$html$Html$text('Blog 0 view');
+var $author$project$Page$Blog1$view = $elm$html$Html$text('Blog 1 view');
+var $author$project$Page$Blog2$view = $elm$html$Html$text('Blog 2 view');
+var $author$project$Main$blogView = function (number) {
+	switch (number) {
+		case 0:
+			return $author$project$Page$Blog0$view;
+		case 1:
+			return $author$project$Page$Blog1$view;
+		case 2:
+			return $author$project$Page$Blog2$view;
+		default:
+			return $author$project$Main$notFoundView;
+	}
+};
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6039,210 +6059,30 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			$elm$json$Json$Encode$string(string));
 	});
-var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
-var $elm$html$Html$b = _VirtualDom_node('b');
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Main$notFoundView = $elm$html$Html$text('Fehler//Not found');
-var $author$project$Einkaufslisten$view = $elm$html$Html$text('Einkaufslisten');
-var $author$project$Lieblingsrezepte$view = $elm$html$Html$text('Lieblingsrezepte');
-var $elm$html$Html$a = _VirtualDom_node('a');
-var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
 		'href',
 		_VirtualDom_noJavaScriptUri(url));
 };
-var $elm$html$Html$img = _VirtualDom_node('img');
-var $elm$html$Html$Attributes$src = function (url) {
+var $elm$html$Html$li = _VirtualDom_node('li');
+var $author$project$Main$externalLinkView = function (href) {
 	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
-var $author$project$Startseite$view = A2(
-	$elm$html$Html$div,
-	_List_fromArray(
-		[
-			$elm$html$Html$Attributes$class('container')
-		]),
-	_List_fromArray(
-		[
-			A2(
-			$elm$html$Html$a,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$href('/index.html')
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$img,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('img'),
-							$elm$html$Html$Attributes$src('./Bilder/Logo.jpg'),
-							$elm$html$Html$Attributes$alt('Logo')
-						]),
-					_List_Nil)
-				])),
-			A2($elm$html$Html$div, _List_Nil, _List_Nil),
-			A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('header-links')
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$a,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$href('/index.html')
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Startseite')
-						])),
-					A2(
-					$elm$html$Html$a,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$href('/lieblingsrezepte.html')
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Lieblingsrezepte')
-						])),
-					A2(
-					$elm$html$Html$a,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$href('/einkauflisten.html')
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Einkaufslisten')
-						]))
-				])),
-			A2($elm$html$Html$div, _List_Nil, _List_Nil),
-			A2(
-			$elm$html$Html$h1,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('h1')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text('Was kochst du heute?')
-				])),
-			A2(
-			$elm$html$Html$h1,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('h1')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text('Klicke auf eine beliebige Kategorie und finde es heraus.')
-				])),
-			A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('svg-container')
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$img,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('svg'),
-									$elm$html$Html$Attributes$src('./SVGs/breakfast.svg')
-								]),
-							_List_Nil),
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('svg Unterschrift')
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Frühstück')
-								]))
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$img,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('svg'),
-									$elm$html$Html$Attributes$src('./SVGs/lunch.svg')
-								]),
-							_List_Nil),
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('svg Unterschrift')
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Mittag-/Abendessen')
-								]))
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$img,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('svg'),
-									$elm$html$Html$Attributes$src('./SVGs/dessert.svg')
-								]),
-							_List_Nil),
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('svg Unterschrift')
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Dessert/Süßes')
-								]))
-						]))
-				]))
-		]));
-var $author$project$Main$blogView = function (number) {
-	switch (number) {
-		case 0:
-			return $author$project$Startseite$view;
-		case 1:
-			return $author$project$Lieblingsrezepte$view;
-		case 2:
-			return $author$project$Einkaufslisten$view;
-		default:
-			return $author$project$Main$notFoundView;
-	}
+		$elm$html$Html$li,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$a,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$href(href)
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(href)
+					]))
+			]));
 };
 var $elm$html$Html$hr = _VirtualDom_node('hr');
 var $elm$url$Url$Builder$toQueryPair = function (_v0) {
@@ -6264,7 +6104,6 @@ var $elm$url$Url$Builder$absolute = F2(
 	function (pathSegments, parameters) {
 		return '/' + (A2($elm$core$String$join, '/', pathSegments) + $elm$url$Url$Builder$toQuery(parameters));
 	});
-var $elm$html$Html$li = _VirtualDom_node('li');
 var $author$project$Main$internalLinkView = function (path) {
 	return A2(
 		$elm$html$Html$li,
@@ -6292,12 +6131,13 @@ var $author$project$Main$internalLinkView = function (path) {
 			]));
 };
 var $elm$html$Html$ul = _VirtualDom_node('ul');
-var $author$project$About$view = $elm$html$Html$text('Über');
+var $author$project$Page$About$view = $elm$html$Html$text('About view');
+var $author$project$Page$Home$view = $elm$html$Html$text('Home view');
 var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
 			[
-				$elm$html$Html$text('URL: '),
+				$elm$html$Html$text('The current URL is: '),
 				A2(
 				$elm$html$Html$b,
 				_List_Nil,
@@ -6307,94 +6147,40 @@ var $author$project$Main$view = function (model) {
 						$elm$url$Url$toString(model.url))
 					])),
 				A2(
-				$elm$html$Html$img,
+				$elm$html$Html$ul,
+				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('img'),
-						$elm$html$Html$Attributes$src('./Bilder/Logo.jpg'),
-						$elm$html$Html$Attributes$alt('Logo')
-					]),
-				_List_Nil),
+						$author$project$Main$internalLinkView('/'),
+						$author$project$Main$internalLinkView('/about'),
+						$author$project$Main$internalLinkView('/blog/0'),
+						$author$project$Main$internalLinkView('/blog/1'),
+						$author$project$Main$internalLinkView('/blog/2')
+					])),
 				A2(
 				$elm$html$Html$ul,
 				_List_Nil,
 				_List_fromArray(
 					[
-						$author$project$Main$internalLinkView('Startseite'),
-						$author$project$Main$internalLinkView('Lieblingsrezepte'),
-						$author$project$Main$internalLinkView('Einkaufslisten'),
-						$author$project$Main$internalLinkView('Impressum')
+						$author$project$Main$externalLinkView('https://github.com/annaghi/elm-github-pages')
 					])),
 				A2($elm$html$Html$hr, _List_Nil, _List_Nil),
 				function () {
 				var _v0 = model.page;
 				switch (_v0.$) {
 					case 'Home':
-						return $author$project$Startseite$view;
+						return $author$project$Page$Home$view;
 					case 'About':
-						return $author$project$About$view;
+						return $author$project$Page$About$view;
 					case 'Blog':
 						var number = _v0.a;
 						return $author$project$Main$blogView(number);
 					default:
 						return $author$project$Main$notFoundView;
 				}
-			}(),
-				A2(
-				$elm$html$Html$h1,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('h1')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Was kochst du heute?')
-					])),
-				A2(
-				$elm$html$Html$h1,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('h1')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Klicke auf das Bild und finde es heraus.')
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('svg-container')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$img,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('svg'),
-										$elm$html$Html$Attributes$src('./SVGs/breakfast.svg')
-									]),
-								_List_Nil),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('svg Unterschrift')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Frühstück')
-									]))
-							]))
-					]))
+			}()
 			]),
-		title: 'Deine Rezeptapp'
+		title: 'annaghi | elm-github-pages'
 	};
 };
 var $author$project$Main$main = $elm$browser$Browser$application(

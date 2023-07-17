@@ -3,13 +3,13 @@ module Main exposing (main)
 import Base
 import Browser
 import Browser.Navigation
-import Html exposing (div, text, h1, h2, a, img)
-import Html.Attributes exposing (class, href, src, alt)
-import About
-import Lieblingsrezepte
-import Einkaufslisten
-import Blog2
-import Startseite
+import Html
+import Html.Attributes
+import Page.About
+import Page.Blog0
+import Page.Blog1
+import Page.Blog2
+import Page.Home
 import Url
 import Url.Builder
 import Url.Parser exposing ((</>))
@@ -128,45 +128,33 @@ toPage url =
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "Deine Rezeptapp"
+    { title = "annaghi | elm-github-pages"
     , body =
-        [ Html.text "URL: "
+        [ Html.text "The current URL is: "
         , Html.b [] [ Html.text (Url.toString model.url) ]
-        , img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
         , Html.ul []
-            [ internalLinkView "Startseite"
-            , internalLinkView "Lieblingsrezepte"
-            , internalLinkView "Einkaufslisten"
-            , internalLinkView "Impressum"
+            [ internalLinkView "/"
+            , internalLinkView "/about"
+            , internalLinkView "/blog/0"
+            , internalLinkView "/blog/1"
+            , internalLinkView "/blog/2"
             ]
+        , Html.ul [] [ externalLinkView "https://github.com/annaghi/elm-github-pages" ]
         , Html.hr [] []
         , case model.page of
             Home ->
-                Startseite.view
+                Page.Home.view
 
             About ->
-                About.view
+                Page.About.view
 
             Blog number ->
                 blogView number
 
             NotFound ->
                 notFoundView
-        , h1 [class "h1"] [ text "Was kochst du heute?" ]
-        , h1 [class "h1"] [ text "Klicke auf das Bild und finde es heraus." ]
-        , div [class "svg-container"]
-            [ div []
-                [ img
-                    [ class "svg"
-                    , src "./SVGs/breakfast.svg"
-                    ]
-                    []
-                , div [class "svg Unterschrift"] [ text "Frühstück" ]
-                ]
-            ]
         ]
     }
-
 
 
 internalLinkView : String -> Html.Html msg
@@ -193,18 +181,18 @@ blogView : Int -> Html.Html msg
 blogView number =
     case number of
         0 ->
-            Startseite.view
+            Page.Blog0.view
 
         1 ->
-            Lieblingsrezepte.view
+            Page.Blog1.view
 
         2 ->
-            Einkaufslisten.view
-            
+            Page.Blog2.view
+
         _ ->
             notFoundView
 
 
 notFoundView : Html.Html msg
 notFoundView =
-    Html.text "Fehler//Not found"
+    Html.text "Not found"
