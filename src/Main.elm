@@ -128,7 +128,7 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "Deine RezeptApp"
     , body = 
-    [ img [ class "img", src "/Bilder/Logo.jpg", alt "Logo" ] []
+        [ img [ class "img", src "/Bilder/Logo.jpg", alt "Logo" ] []
         , Html.ul [class "ul"]
             [ internalLinkView "Startseite"
             , internalLinkView "Lieblingsrezepte"
@@ -150,6 +150,7 @@ view model =
         , text "test" 
         ]
     }
+
 
 
 internalLinkView : String -> Html.Html msg
