@@ -5890,7 +5890,7 @@ var $author$project$Main$route = $elm$url$Url$Parser$oneOf(
 			A2(
 				$elm$url$Url$Parser$slash,
 				$elm$url$Url$Parser$s($author$project$Base$base),
-				$elm$url$Url$Parser$s('Einkauflisten')))
+				$elm$url$Url$Parser$s('Einkaufslisten')))
 		]));
 var $author$project$Main$toPage = function (url) {
 	var _v0 = A2($elm$url$Url$Parser$parse, $author$project$Main$route, url);
@@ -6349,7 +6349,7 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$class('img'),
-						$elm$html$Html$Attributes$src('./Bilder/Logo.jpg'),
+						$elm$html$Html$Attributes$src('/Bilder/Logo.jpg'),
 						$elm$html$Html$Attributes$alt('Logo')
 					]),
 				_List_Nil),
