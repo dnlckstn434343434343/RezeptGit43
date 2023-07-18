@@ -35,10 +35,12 @@ button {
     text-align: center;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
-    transition-duration: 0.4s;
 
 }
 
+button {
+    transition-duration: 0.4s;
+}
   
 button:hover {
     background-color: #ff0404;
@@ -81,8 +83,4 @@ img {
 
 .header-links a {
     margin: 0 10px;
-}
-
-ul {
-    color: #ff7300; 
 }
