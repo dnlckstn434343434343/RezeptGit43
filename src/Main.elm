@@ -3,18 +3,15 @@ module Main exposing (main)
 import Base
 import Browser
 import Browser.Navigation
-import Page.Lieblingsrezepte exposing (..)
-import Page.Einkaufslisten exposing (..)
-import Page.Startseite exposing (..)
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Page.Lieblingsrezepte
+import Page.Einkaufslisten
+import Page.Startseite
 import Url
 import Url.Builder
 import Url.Parser exposing ((</>))
-import Html exposing (ul)
-import Html.Attributes exposing (class)
-import Html exposing (text)
-import Html exposing (img)
-import Html.Attributes exposing (src)
-import Html.Attributes exposing (alt)
+
 
 
 -- MAIN
@@ -30,6 +27,7 @@ main =
         , onUrlChange = UrlChanged
         , onUrlRequest = LinkClicked
         }
+
 
 
 -- MODEL
@@ -57,6 +55,7 @@ init flags url key =
       }
     , Cmd.none
     )
+
 
 
 -- UPDATE
@@ -88,6 +87,7 @@ update msg model =
             )
 
 
+
 -- SUBSCRIPTIONS
 
 
@@ -96,17 +96,18 @@ subscriptions _ =
     Sub.none
 
 
+
 -- ROUTE
 
 
 route : Url.Parser.Parser (Page -> a) a
 route =
     Url.Parser.oneOf
-        [ Url.Parser.map Startseite (Url.Parser.s Base.base </> Url.Parser.s "Startseite")
+        [ Url.Parser.map Startseite Url.Parser.top
+        , Url.Parser.map Startseite (Url.Parser.s Base.base)
         , Url.Parser.map Lieblingsrezepte (Url.Parser.s Base.base </> Url.Parser.s "Lieblingsrezepte")
-        , Url.Parser.map Einkaufslisten (Url.Parser.s Base.base </> Url.Parser.s "Einkaufslisten")
+        , Url.Parser.map Einkaufslisten (Url.Parser.s Base.base </> Url.Parser.s "Einkauflisten")
         ]
-
 
 
 toPage : Url.Url -> Page
@@ -119,18 +120,19 @@ toPage url =
             NotFound
 
 
+
 -- VIEW
 
 
 view : Model -> Browser.Document Msg
 view model =
     { title = "Deine RezeptApp"
-    , body =
-        [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
+    , body = 
+    [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] []
         , Html.ul [class "ul"]
-            [ internalLinkView "/Startseite" "Startseite"
-            , internalLinkView "/Lieblingsrezepte" "Lieblingsrezepte"
-            , internalLinkView "/Einkaufslisten" "Einkaufslisten"
+            [ internalLinkView "/Startseite"
+            , internalLinkView "/Lieblingsrezepte"
+            , internalLinkView "/Einkaufslisten"
             ]
         , Html.hr [] []
         , case model.page of
@@ -145,18 +147,19 @@ view model =
 
             NotFound ->
                 notFoundView
+        , text "test" 
         ]
     }
 
 
-internalLinkView : String -> String -> Html.Html msg
-internalLinkView path label =
+internalLinkView : String -> Html.Html msg
+internalLinkView path =
     Html.li []
         [ Html.a
             [ Html.Attributes.href <|
                 Url.Builder.absolute [ Base.base, String.dropLeft 1 path ] []
             ]
-            [ Html.text label ]
+            [ Html.text path ]
         ]
 
 

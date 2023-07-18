@@ -6,4 +6,3 @@ import Html
 view : Html.Html msg
 view =
     Html.text "Startseite"
-
