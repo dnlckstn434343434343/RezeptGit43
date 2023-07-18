@@ -130,9 +130,9 @@ view model =
     , body = 
     [ img [ class "img", src "/Bilder/Logo.jpg", alt "Logo" ] []
         , Html.ul [class "ul"]
-            [ internalLinkView "/Startseite"
-            , internalLinkView "/Lieblingsrezepte"
-            , internalLinkView "/Einkaufslisten"
+            [ internalLinkView "Startseite"
+            , internalLinkView "Lieblingsrezepte"
+            , internalLinkView "Einkaufslisten"
             ]
         , Html.hr [] []
         , case model.page of

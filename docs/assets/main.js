@@ -6361,9 +6361,9 @@ var $author$project$Main$view = function (model) {
 					]),
 				_List_fromArray(
 					[
-						$author$project$Main$internalLinkView('/Startseite'),
-						$author$project$Main$internalLinkView('/Lieblingsrezepte'),
-						$author$project$Main$internalLinkView('/Einkaufslisten')
+						$author$project$Main$internalLinkView('Startseite'),
+						$author$project$Main$internalLinkView('Lieblingsrezepte'),
+						$author$project$Main$internalLinkView('Einkaufslisten')
 					])),
 				A2($elm$html$Html$hr, _List_Nil, _List_Nil),
 				function () {
