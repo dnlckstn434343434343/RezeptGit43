@@ -4,8 +4,8 @@ import Browser
 import Html exposing (Html, div, text, h1, h2, a, img)
 import Html.Attributes exposing (class, href, src, alt)
 import Html.Events exposing (onClick)
-import Lieblingsrezepte
-import Einkaufsliste
+import Lieblingsrezepte exposing (..)
+import Einkaufsliste exposing (..)
 
 -- Main program
 
@@ -76,6 +76,7 @@ view model =
                     ]
                     []
                 , div [class "svg Unterschrift"] [ text "Dessert/Süßes" ]
+                , div [] [] 
                 ]
             ]
         ]
