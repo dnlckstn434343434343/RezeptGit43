@@ -1,188 +1,119 @@
-module Main exposing (main)
+module Main exposing (..)
 
-import Base
 import Browser
-import Browser.Navigation
+import Einkaufslisten exposing (..)
+import Lieblingsrezepte exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Page.Lieblingsrezepte
-import Page.Einkaufslisten
-import Page.Startseite
-import Url
-import Url.Builder
-import Url.Parser exposing ((</>))
 
 
 
--- MAIN
-
-
-main : Program () Model Msg
-main =
-    Browser.application
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        , onUrlChange = UrlChanged
-        , onUrlRequest = LinkClicked
-        }
-
-
-
--- MODEL
-
-
-type Page
-    = Startseite
-    | Lieblingsrezepte
-    | Einkaufslisten
-    | NotFound
-
+-- Combined Model
 
 type alias Model =
-    { key : Browser.Navigation.Key
-    , url : Url.Url
-    , page : Page
+    { lieblingsrezepteModel : Lieblingsrezepte.Model
+    , einkaufslistenModel : Einkaufslisten.Model
     }
 
 
-init : () -> Url.Url -> Browser.Navigation.Key -> ( Model, Cmd Msg )
-init flags url key =
-    ( { key = key
-      , url = url
-      , page = toPage url
-      }
-    , Cmd.none
-    )
-
-
-
--- UPDATE
-
+-- Combined Msg
 
 type Msg
-    = LinkClicked Browser.UrlRequest
-    | UrlChanged Url.Url
+    = LieblingsrezepteMsg Lieblingsrezepte.Msg
+    | EinkaufslistenMsg Einkaufslisten.Msg
 
+
+-- Combined Update
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        LinkClicked urlRequest ->
-            case urlRequest of
-                Browser.Internal url ->
-                    ( model
-                    , Browser.Navigation.pushUrl model.key (Url.toString url)
-                    )
+        LieblingsrezepteMsg subMsg ->
+            let
+                ( updatedLieblingsrezepteModel, lieblingsrezepteCmd ) =
+                    Lieblingsrezepte.update subMsg model.lieblingsrezepteModel
+            in
+            ( { model | lieblingsrezepteModel = updatedLieblingsrezepteModel }, Cmd.map LieblingsrezepteMsg lieblingsrezepteCmd )
 
-                Browser.External href ->
-                    ( model
-                    , Browser.Navigation.load href
-                    )
-
-        UrlChanged url ->
-            ( { model | url = url, page = toPage url }
-            , Cmd.none
-            )
+        EinkaufslistenMsg subMsg ->
+            let
+                ( updatedEinkaufslistenModel, einkaufslistenCmd ) =
+                    Einkaufslisten.update subMsg model.einkaufslistenModel
+            in
+            ( { model | einkaufslistenModel = updatedEinkaufslistenModel }, Cmd.map EinkaufslistenMsg einkaufslistenCmd )
 
 
+-- Combined View
 
--- SUBSCRIPTIONS
-
-
-subscriptions : Model -> Sub Msg
-subscriptions _ =
-    Sub.none
-
-
-
--- ROUTE
-
-
-route : Url.Parser.Parser (Page -> a) a
-route =
-    Url.Parser.oneOf
-        [ Url.Parser.map Startseite Url.Parser.top
-        , Url.Parser.map Startseite (Url.Parser.s Base.base)
-        , Url.Parser.map Lieblingsrezepte (Url.Parser.s Base.base </> Url.Parser.s "Lieblingsrezepte")
-        , Url.Parser.map Einkaufslisten (Url.Parser.s Base.base </> Url.Parser.s "Einkaufslisten")
-        ]
-
-
-toPage : Url.Url -> Page
-toPage url =
-    case Url.Parser.parse route url of
-        Just answer ->
-            answer
-
-        Nothing ->
-            NotFound
-
-
-
--- VIEW
-
-
-view : Model -> Browser.Document Msg
+view : Model -> Html Msg
 view model =
-    { title = "Deine RezeptApp"
-    , body = 
-        [ img [ class "img", src "/Bilder/Logo.jpg", alt "Logo" ] []
-        , Html.ul [class "ul"]
-            [ internalLinkView "Startseite"
-            , internalLinkView "Lieblingsrezepte"
-            , internalLinkView "Einkaufslisten"
+    div []
+        [ div [] [ Lieblingsrezepte.view model.lieblingsrezepteModel |> Html.map LieblingsrezepteMsg ]
+        , div [] [ Einkaufslisten.view model.einkaufslistenModel |> Html.map EinkaufslistenMsg ]
+        , a [ href "/index.html" ]
+            [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] [] ]
+        , div [] []
+        , div [ class "header-links" ]
+            [ a [ href "/index.html" ] [ text "Startseite" ]
+            , a [ href "/lieblingsrezepte.html" ] [ text "Lieblingsrezepte" ]
+            , a [ href "/einkauflisten.html" ] [ text "Einkaufslisten" ]
             ]
-        , Html.hr [] []
-        , case model.page of
-            Startseite ->
-                Page.Startseite.view
-
-            Lieblingsrezepte ->
-                Page.Lieblingsrezepte.view
-
-            Einkaufslisten ->
-                Page.Einkaufslisten.view
-
-            NotFound ->
-                notFoundView
-        , text "test" 
-        ]
-    }
-
-
-
-internalLinkView : String -> Html.Html msg
-internalLinkView path =
-    Html.li []
-        [ Html.a
-            [ Html.Attributes.href <|
-                Url.Builder.absolute [ Base.base, String.dropLeft 1 path ] []
+        , div [] []
+        , h2 [] [ text "Was kochst du heute? Klicke auf eine beliebige Kategorie und finde es heraus." ]
+        , div [ class "svg-container" ]
+            [ div []
+                [ img
+                    [ class "svg"
+                    , src "./SVGs/breakfast.svg"
+                    ]
+                    []
+                , div [class "svg.Unterschrift"] [ text "Frühstück" ]
+                ]
+            , div []
+                [ img
+                    [ class "svg"
+                    , src "./SVGs/lunch.svg"
+                    ]
+                    []
+                , div [class "svg.Unterschrift"] [ text "Mittag-/Abendessen" ]
+                ]
+            , div []
+                [ img
+                    [ class "svg"
+                    , src "./SVGs/dessert.svg"
+                    ]
+                    []
+                , div [class "svg.Unterschrift"] [ text "Dessert/Süßes" ]
+                ]
             ]
-            [ Html.text path ]
         ]
 
 
-externalLinkView : String -> Html.Html msg
-externalLinkView href =
-    Html.li []
-        [ Html.a
-            [ Html.Attributes.href href ]
-            [ Html.text href ]
-        ]
 
 
-blogView : Int -> Html.Html msg
-blogView number =
-    case number of
-        0 ->
-            Page.Einkaufslisten.view
+-- Combined Main
 
-        _ ->
-            notFoundView
+main : Program () Model Msg
+main =
+    Browser.element
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = \_ -> Sub.none
+        }
 
 
-notFoundView : Html.Html msg
-notFoundView =
-    Html.text "Not found"
+-- Combined Initialization
+
+init : () -> ( Model, Cmd Msg )
+init _ =
+    let
+        ( lieblingsrezepteModel, lieblingsrezepteCmd ) =
+            Lieblingsrezepte.init ()
+
+        ( einkaufslistenModel, einkaufslistenCmd ) =
+            Einkaufslisten.init ()
+    in
+    ( { lieblingsrezepteModel = lieblingsrezepteModel, einkaufslistenModel = einkaufslistenModel }
+    , Cmd.batch [ Cmd.map LieblingsrezepteMsg lieblingsrezepteCmd, Cmd.map EinkaufslistenMsg einkaufslistenCmd ]
+    )
