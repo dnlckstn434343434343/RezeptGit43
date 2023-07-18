@@ -5762,7 +5762,7 @@ var $elm$url$Url$Parser$parse = F2(
 var $author$project$Main$Einkaufslisten = {$: 'Einkaufslisten'};
 var $author$project$Main$Lieblingsrezepte = {$: 'Lieblingsrezepte'};
 var $author$project$Main$Startseite = {$: 'Startseite'};
-var $author$project$Base$base = 'elm-github-pages';
+var $author$project$Base$base = 'Base';
 var $elm$url$Url$Parser$Parser = function (a) {
 	return {$: 'Parser', a: a};
 };
