@@ -106,7 +106,7 @@ route =
         [ Url.Parser.map Startseite Url.Parser.top
         , Url.Parser.map Startseite (Url.Parser.s Base.base)
         , Url.Parser.map Lieblingsrezepte (Url.Parser.s Base.base </> Url.Parser.s "Lieblingsrezepte")
-        , Url.Parser.map Einkaufslisten (Url.Parser.s Base.base </> Url.Parser.s "Einkauflisten")
+        , Url.Parser.map Einkaufslisten (Url.Parser.s Base.base </> Url.Parser.s "Einkaufslisten")
         ]
 
 
