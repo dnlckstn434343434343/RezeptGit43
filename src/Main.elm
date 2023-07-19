@@ -9,12 +9,10 @@ import Http
 import Json.Decode as Json
 import Url
 
-
+-- Zum Ausführen Go Live Extension + "elm make src/Main.elm --output=Main.js --debug"
 
 -- Main program
 -- Die Hauptfunktion des Programms
-
-
 main :
     Program
         ()
@@ -35,11 +33,8 @@ main =
         }
 
 
-
 -- Model
 -- Der Zustand des Programms
-
-
 type alias Model =
     { key : Nav.Key
     , url : Url.Url
@@ -48,36 +43,37 @@ type alias Model =
     }
 
 
-
 -- Die Struktur eines Rezepts
-
-
 type alias Recipe =
-    { id : String, name : String, description : String }
-
+    { id : String
+    , name : String
+    , description : String
+    }
 
 
 -- Initialisierungsfunktion für das Modell
-
-
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-    ( { key = key, url = url, recipe = {id = "", name = "", description = ""}, error = ""}
+    ( { key = key
+      , url = url
+      , recipe = { id = ""
+                 , name = ""
+                 , description = ""
+                 }
+      , error = ""
+      }
     , Cmd.none
     )
 
 
-
--- Messages
 -- View
 -- Die Darstellung der Benutzeroberfläche
-
-
 view : Model -> Browser.Document Msg
 view model =
     { title = "Deine RezeptApp"
     , body =
         [ div [ class "container" ]
+            -- Header der Anwendung
             [ a [ href "/index.html" ]
                 [ img [ class "img", src "./Bilder/Logo.jpg", alt "Logo" ] [] ]
             , div [] []
@@ -87,8 +83,10 @@ view model =
                 , a [ href "/einkauflisten.html" ] [ text "Einkaufslisten" ]
                 ]
             , div [] []
+            -- Überschriften
             , h1 [ class "h1" ] [ text "Was kochst du heute?" ]
             , h1 [ class "h1" ] [ text "Klicke auf eine beliebige Kategorie und finde es heraus." ]
+            -- Kategorien
             , div [ class "svg-container" ]
                 [ div []
                     [ img
@@ -124,10 +122,8 @@ view model =
     }
 
 
-
+-- Messages
 -- Die verschiedenen Nachrichten, die das Programm empfangen kann
-
-
 type Msg
     = LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
@@ -135,29 +131,25 @@ type Msg
     | GOTnewRecipe (Result Http.Error HTTPSearchResults)
 
 
-
 -- Update
 -- Die Aktualisierung des Modells basierend auf den empfangenen Nachrichten
-
-
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         LinkClicked urlRequest ->
             case urlRequest of
                 Browser.Internal url ->
+                    -- Navigations-URL intern ändern
                     ( model, Nav.pushUrl model.key (Url.toString url) )
 
                 Browser.External href ->
+                    -- Navigations-URL extern laden
                     ( model, Nav.load href )
 
         UrlChanged url ->
-            ( { model
-                | url = url
-              }
-            , Cmd.none
-            )
-        
+            -- URL im Modell aktualisieren
+            ( { model | url = url }, Cmd.none )
+
         GETnewRecipe ->
             ( model
             , Http.request
@@ -174,38 +166,31 @@ update msg model =
         GOTnewRecipe httpResponse ->
             case httpResponse of
                 Ok result ->
+                    -- Aktualisiertes Modell mit dem Standardrezept
                     ( { model | recipe = defaultRecipe }, Cmd.none )
 
                 Err _ ->
+                    -- Fehlermeldung im Modell setzen
                     ( { model | error = "Fehlerhafte Antwort" }, Cmd.none )
 
 
-
 -- SUBSCRIPTIONS
-
-
 subscriptions : Model -> Sub Msg
 subscriptions _ =
     Sub.none
 
 
-
 -- Decoder
 -- Decoder für die API-Antworten
-
-
 type alias HTTPSearchResults =
     { meals : List Recipe }
 
 
-
 -- Decoder für ein einzelnes Rezept
-
-
 recipeDecoder : Json.Decoder HTTPSearchResults
 recipeDecoder =
     Json.map HTTPSearchResults
-        (Json.field "results" (Json.list mealsDecoder))
+        (Json.field "meals" (Json.list mealsDecoder))
 
 
 mealsDecoder : Json.Decoder Recipe
@@ -216,14 +201,11 @@ mealsDecoder =
         (Json.field "strInstructions" Json.string)
 
 
-
 -- Default Recipe
 -- Ein Standardrezept, das angezeigt wird, wenn kein Rezept gefunden wurde
-
-
 defaultRecipe : Recipe
 defaultRecipe =
     { id = ""
-    , name = "No recipe found"
-    , description = "Please try again"
+    , name = "Kein Rezept gefunden"
+    , description = "Bitte versuche es erneut"
     }

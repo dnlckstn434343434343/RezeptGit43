@@ -14,13 +14,16 @@ import Maybe exposing (withDefault)
 import Html exposing (br)
 import Html exposing (p)
 
+
 -- Model
 
+-- Der Modelltyp `Model` enthält eine Liste von Rezepten (`recipes`) und ein neues Rezept (`newRecipe`).
 type alias Model =
     { recipes : List Recipe
     , newRecipe : NewRecipe
     }
 
+-- Der Modelltyp `Recipe` repräsentiert ein einzelnes Rezept mit verschiedenen Eigenschaften wie ID, Name, Zutaten usw.
 type alias Recipe =
     { id : Int
     , name : String
@@ -30,6 +33,7 @@ type alias Recipe =
     , difficulty : String
     }
 
+-- Der Modelltyp `NewRecipe` repräsentiert ein neues Rezept, das hinzugefügt werden kann. Es enthält ähnliche Eigenschaften wie `Recipe`.
 type alias NewRecipe =
     { name : String
     , ingredients : String
@@ -41,6 +45,7 @@ type alias NewRecipe =
 
 -- Msg
 
+-- Die verschiedenen Nachrichten (`Msg`), die das Programm empfangen kann.
 type Msg
     = AddRecipe
     | UpdateNewRecipeName String
@@ -52,6 +57,7 @@ type Msg
 
 -- Msg Decoders
 
+-- Der Decoder `newRecipeDecoder` wird verwendet, um JSON-Daten in den `NewRecipe`-Typ zu decodieren.
 newRecipeDecoder : Decoder NewRecipe
 newRecipeDecoder =
     Json.Decode.map5 NewRecipe
@@ -61,6 +67,7 @@ newRecipeDecoder =
         (Json.Decode.field "preparationTime" Json.Decode.int)
         (Json.Decode.field "difficulty" Json.Decode.string)
 
+-- Der Decoder `recipeDecoder` wird verwendet, um JSON-Daten in den `Recipe`-Typ zu decodieren.
 recipeDecoder : Decoder Recipe
 recipeDecoder =
     Json.Decode.map6 Recipe
@@ -74,14 +81,18 @@ recipeDecoder =
 
 -- Update
 
+-- Die Update-Funktion verarbeitet die verschiedenen Nachrichten (`Msg`) und aktualisiert den Modellzustand entsprechend.
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg { recipes, newRecipe } =
     case msg of
+        -- Wenn `AddRecipe` empfangen wird, wird ein neues Rezept zum Modell hinzugefügt.
         AddRecipe ->
             let
+                -- Generiere eine neue ID für das Rezept, indem die Länge der vorhandenen Rezepte ermittelt wird.
                 newId =
                     List.length recipes + 1
 
+                -- Erstelle ein neues `Recipe`-Objekt mit den Daten aus dem `newRecipe`-Feld des Modells.
                 newRecipeItem =
                     { id = newId
                     , name = newRecipe.name
@@ -91,30 +102,39 @@ update msg { recipes, newRecipe } =
                     , difficulty = newRecipe.difficulty
                     }
             in
+            -- Füge das neue Rezept zum Anfang der Rezeptliste hinzu und setze das `newRecipe`-Feld zurück.
             ( { recipes = newRecipeItem :: recipes, newRecipe = NewRecipe "" "" "" 0 "" }, Cmd.none )
 
+        -- Aktualisiere den Namen des neuen Rezepts im Modell.
         UpdateNewRecipeName newName ->
             ( { recipes = recipes, newRecipe = { newRecipe | name = newName } }, Cmd.none )
 
+        -- Aktualisiere die Zutaten des neuen Rezepts im Modell.
         UpdateNewRecipeIngredients newIngredients ->
             ( { recipes = recipes, newRecipe = { newRecipe | ingredients = newIngredients } }, Cmd.none )
 
+        -- Aktualisiere die Kategorie des neuen Rezepts im Modell.
         UpdateNewRecipeCategory newCategory ->
             ( { recipes = recipes, newRecipe = { newRecipe | category = newCategory } }, Cmd.none )
 
+        -- Aktualisiere die Zubereitungszeit des neuen Rezepts im Modell.
         UpdateNewRecipePreparationTime newPreparationTime ->
             let
+                -- Versuche, die eingegebene Zeit in einen Integer-Wert umzuwandeln.
                 parsedTime =
                     String.toInt newPreparationTime
             in
+            -- Setze die Zubereitungszeit des neuen Rezepts im Modell auf den geparsten Wert oder 0 (falls die Konvertierung fehlschlägt).
             ( { recipes = recipes, newRecipe = { newRecipe | preparationTime = Maybe.withDefault 0 parsedTime } }, Cmd.none )
 
+        -- Aktualisiere die Schwierigkeit des neuen Rezepts im Modell.
         UpdateNewRecipeDifficulty newDifficulty ->
             ( { recipes = recipes, newRecipe = { newRecipe | difficulty = newDifficulty } }, Cmd.none )
 
 
 -- View
 
+-- Die view-Funktion erzeugt die HTML-Darstellung des Modells.
 view : Model -> Html Msg
 view model =
     div [ class "container" ]
@@ -125,6 +145,7 @@ view model =
         , viewRecipeList model.recipes
         ]
 
+-- Die viewNewRecipeForm-Funktion erzeugt das HTML-Formular zum Hinzufügen eines neuen Rezepts.
 viewNewRecipeForm : NewRecipe -> Html Msg
 viewNewRecipeForm newRecipe =
     div []
@@ -153,6 +174,7 @@ viewNewRecipeForm newRecipe =
             ]
         ]
 
+-- Die viewRecipeList-Funktion erzeugt die HTML-Liste der gespeicherten Rezepte.
 viewRecipeList : List Recipe -> Html Msg
 viewRecipeList recipes =
     div []
@@ -160,6 +182,7 @@ viewRecipeList recipes =
         , ul [] (List.map viewRecipe recipes)
         ]
 
+-- Die viewRecipe-Funktion erzeugt die HTML-Darstellung eines einzelnen Rezepts.
 viewRecipe : Recipe -> Html Msg
 viewRecipe recipe =
     li []
@@ -188,6 +211,7 @@ viewRecipe recipe =
 
 -- Encoding and Decoding
 
+-- Die Funktion `encodeRecipe` wandelt ein `Recipe`-Objekt in eine JSON-Darstellung um.
 encodeRecipe : Recipe -> Value
 encodeRecipe recipe =
     Json.Encode.object
@@ -199,6 +223,7 @@ encodeRecipe recipe =
         , ( "difficulty", Json.Encode.string recipe.difficulty )
         ]
 
+-- Die Funktion `encodeNewRecipe` wandelt ein `NewRecipe`-Objekt in eine JSON-Darstellung um.
 encodeNewRecipe : NewRecipe -> Value
 encodeNewRecipe newRecipe =
     Json.Encode.object
@@ -209,10 +234,12 @@ encodeNewRecipe newRecipe =
         , ( "difficulty", Json.Encode.string newRecipe.difficulty )
         ]
 
+-- Der Decoder `decodeRecipe` wird verwendet, um JSON-Daten in den `Recipe`-Typ zu decodieren.
 decodeRecipe : Decoder Recipe
 decodeRecipe =
     recipeDecoder
 
+-- Der Decoder `decodeNewRecipe` wird verwendet, um JSON-Daten in den `NewRecipe`-Typ zu decodieren.
 decodeNewRecipe : Decoder NewRecipe
 decodeNewRecipe =
     newRecipeDecoder
@@ -220,6 +247,7 @@ decodeNewRecipe =
 
 -- Main
 
+-- Die `main`-Funktion ist der Einstiegspunkt des Programms.
 main : Program () Model Msg
 main =
     Browser.element
@@ -229,6 +257,7 @@ main =
         , subscriptions = \_ -> Sub.none
         }
 
+-- Die `init`-Funktion initialisiert den Anfangszustand des Modells.
 init : () -> ( Model, Cmd Msg )
 init _ =
     ( { recipes = [], newRecipe = NewRecipe "" "" "" 0 "" }, Cmd.none )
